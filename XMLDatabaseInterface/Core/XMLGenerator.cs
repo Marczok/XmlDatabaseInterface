@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml;
 using System.Xml.Serialization;
 using XMLDatabaseInterface.Core.DomainTypes;
 
@@ -43,12 +44,21 @@ namespace XMLDatabaseInterface.Core
             {
                 var dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
                 dateTime = dateTime.AddSeconds(rnd.Next(1532031622)).ToLocalTime();
+                
+                string name = string.Empty, surename = string.Empty;
+                while (name == string.Empty || surename == string.Empty)
+                {
+                    name = firstNames[rnd.Next(firstNames.Length - 1)];
+                    surename = lastNames[rnd.Next(lastNames.Length - 1)];
+                }
+
+                var address = Adresses[rnd.Next(Adresses.Length - 1)] + " " + rnd.Next(128);
 
                 persons.Add(new Person
                 {
-                    Name = firstNames[rnd.Next(firstNames.Length - 1)],
-                    Surename = lastNames[rnd.Next(lastNames.Length - 1)],
-                    Address = Adresses[rnd.Next(Adresses.Length - 1)] + " " + rnd.Next(128),
+                    Name = name,
+                    Surename = surename,
+                    Address = address,
                     Birthdate = dateTime.ToShortDateString()
                 });
             }
@@ -57,6 +67,23 @@ namespace XMLDatabaseInterface.Core
             using (var writer = new StreamWriter(filename))
             {
                 serializer.Serialize(writer, persons);
+            }
+        }
+
+        public static List<Person> ReadDatabase(string filename)
+        {
+            var serializer = new XmlSerializer(typeof(List<Person>));
+            using (var stream = new FileStream(filename, FileMode.Open))
+            {
+                var reader = XmlReader.Create(stream);
+                if (serializer.CanDeserialize(reader))
+                {
+                    return (List<Person>)serializer.Deserialize(reader);
+                }
+                else
+                {
+                    throw new DirectoryNotFoundException("File cannot be found or deserialized");
+                }
             }
         }
 
