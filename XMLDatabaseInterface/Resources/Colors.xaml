@@ -65,4 +65,8 @@
                      Color="{StaticResource LightGray}"/>
     <SolidColorBrush x:Key="MenuItemDisableBrush"
                      Color="{StaticResource Text}"/>
+    
+    <!--Window container-->
+    <SolidColorBrush x:Key="WindowContainerBrush"
+                     Color="{StaticResource BlackTransparent}"/>
 </ResourceDictionary>

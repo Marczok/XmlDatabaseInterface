@@ -5,11 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" 
+        Height="450" 
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        Name="AppMainWindow">
     <Grid>
-    <xctk:WindowContainer>
-
-    </xctk:WindowContainer>
+        <xctk:WindowContainer ModalBackgroundBrush="{StaticResource WindowContainerBrush}">
+            <xctk:ChildWindow WindowState="Open"
+                              WindowStartupLocation="Center"
+                              IsModal="True"
+                              Caption="Data source">
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Horizontal">
+                        <Button Content="Generate database"
+                                Margin="2"/>
+                        <xctk:IntegerUpDown Margin="2"
+                                            Width="100"/>
+                    </StackPanel>
+                    <Button Content="Load saved database"
+                            Margin="2"/>
+                </StackPanel>
+            </xctk:ChildWindow>
+        </xctk:WindowContainer>
     </Grid>
 
 </Window>
