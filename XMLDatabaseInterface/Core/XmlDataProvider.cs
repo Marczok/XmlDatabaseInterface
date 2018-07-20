@@ -7,7 +7,7 @@ using XMLDatabaseInterface.Core.DomainTypes;
 
 namespace XMLDatabaseInterface.Core
 {
-    public static class XmlGenerator
+    public static class XmlDataProvider
     {
         private static readonly string[] Adresses =
         {
@@ -31,7 +31,7 @@ namespace XMLDatabaseInterface.Core
             "Koln, Kasse Strasse"
         };
 
-        public static void GenerateDatabase(int size, string filename)
+        public static List<Person> GenerateDatabase(int size)
         {
             var firstNames = File.ReadAllLines("Resources/DataSources/FirstNames.txt");
             var lastNames = File.ReadAllLines("Resources/DataSources/Surnames.txt");
@@ -63,11 +63,7 @@ namespace XMLDatabaseInterface.Core
                 });
             }
 
-            var serializer = new XmlSerializer(typeof(List<Person>));
-            using (var writer = new StreamWriter(filename))
-            {
-                serializer.Serialize(writer, persons);
-            }
+            return persons;
         }
 
         public static List<Person> ReadDatabase(string filename)
@@ -80,10 +76,17 @@ namespace XMLDatabaseInterface.Core
                 {
                     return (List<Person>)serializer.Deserialize(reader);
                 }
-                else
-                {
-                    throw new DirectoryNotFoundException("File cannot be found or deserialized");
-                }
+
+                throw new DirectoryNotFoundException("File cannot be found or deserialized");
+            }
+        }
+
+        public static void WriteDatabase(List<Person> data, string filename)
+        {
+            var serializer = new XmlSerializer(typeof(List<Person>));
+            using (var writer = new StreamWriter(filename))
+            {
+                serializer.Serialize(writer, data);
             }
         }
 
