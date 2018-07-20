@@ -30,7 +30,7 @@ namespace XMLDatabaseInterface.Core
             "Koln, Kasse Strasse"
         };
 
-        public static void GenerateDatabase(int size)
+        public static void GenerateDatabase(int size, string filename)
         {
             var firstNames = File.ReadAllLines("Resources/DataSources/FirstNames.txt");
             var lastNames = File.ReadAllLines("Resources/DataSources/Surnames.txt");
@@ -44,14 +44,20 @@ namespace XMLDatabaseInterface.Core
                 var dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
                 dateTime = dateTime.AddSeconds(rnd.Next(1532031622)).ToLocalTime();
 
-                persons.Add(new Person{
+                persons.Add(new Person
+                {
                     Name = firstNames[rnd.Next(firstNames.Length - 1)],
                     Surename = lastNames[rnd.Next(lastNames.Length - 1)],
-                    Address = Adresses[rnd.Next(Adresses.Length - 1)] +  " " + rnd.Next(128),
-                    Birthdate = dateTime.ToShortDateString()});
+                    Address = Adresses[rnd.Next(Adresses.Length - 1)] + " " + rnd.Next(128),
+                    Birthdate = dateTime.ToShortDateString()
+                });
             }
 
-            new XmlSerializer(typeof(List<Person>)).Serialize(Console.Out, persons);
+            var serializer = new XmlSerializer(typeof(List<Person>));
+            using (var writer = new StreamWriter(filename))
+            {
+                serializer.Serialize(writer, persons);
+            }
         }
 
     }
