@@ -6,7 +6,7 @@ using XMLDatabaseInterface.Core.DomainTypes;
 
 namespace XMLDatabaseInterface.Core
 {
-    public class XMLGenerator
+    public static class XmlGenerator
     {
         private static readonly string[] Adresses =
         {

@@ -101,7 +101,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core\DomainTypes\Person.cs" />
-    <Compile Include="Core\XMLGenerator.cs" />
+    <Compile Include="Core\XmlGenerator.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
