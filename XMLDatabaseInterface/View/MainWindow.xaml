@@ -4,13 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
+        xmlns:viewModel="clr-namespace:XMLDatabaseInterface.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="450" 
         Width="800"
         WindowStartupLocation="CenterScreen"
-        Name="AppMainWindow">
+        Name="AppMainWindow" 
+        d:DataContext="{d:DesignInstance viewModel:MainWindowViewModel}"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
     <Grid>
+        <Grid.Resources>
+            <xcdg:DataGridCollectionViewSource x:Key="DataGridSource"
+                                               Source="{Binding Persons}"/>
+        </Grid.Resources>
+        <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource DataGridSource}}"/>
+        
         <xctk:WindowContainer ModalBackgroundBrush="{StaticResource WindowContainerBrush}">
             <xctk:ChildWindow WindowState="Open"
                               WindowStartupLocation="Center"
@@ -19,9 +29,11 @@
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <Button Content="Generate database"
-                                Margin="2"/>
+                                Margin="2"
+                                Command="{Binding GenerateData}"/>
                         <xctk:IntegerUpDown Margin="2"
-                                            Width="100"/>
+                                            Width="100"
+                                            Value="{Binding DatabaseSize, Mode=TwoWay}"/>
                     </StackPanel>
                     <Button Content="Load saved database"
                             Margin="2"/>

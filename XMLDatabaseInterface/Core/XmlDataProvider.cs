@@ -31,7 +31,7 @@ namespace XMLDatabaseInterface.Core
             "Koln, Kasse Strasse"
         };
 
-        public static List<Person> GenerateDatabase(int size)
+        public static IEnumerable<Person> GenerateDatabase(int size)
         {
             var firstNames = File.ReadAllLines("Resources/DataSources/FirstNames.txt");
             var lastNames = File.ReadAllLines("Resources/DataSources/Surnames.txt");
@@ -66,7 +66,7 @@ namespace XMLDatabaseInterface.Core
             return persons;
         }
 
-        public static List<Person> ReadDatabase(string filename)
+        public static IEnumerable<Person> ReadDatabase(string filename)
         {
             var serializer = new XmlSerializer(typeof(List<Person>));
             using (var stream = new FileStream(filename, FileMode.Open))
@@ -81,7 +81,7 @@ namespace XMLDatabaseInterface.Core
             }
         }
 
-        public static void WriteDatabase(List<Person> data, string filename)
+        public static void WriteDatabase(IEnumerable<Person> data, string filename)
         {
             var serializer = new XmlSerializer(typeof(List<Person>));
             using (var writer = new StreamWriter(filename))

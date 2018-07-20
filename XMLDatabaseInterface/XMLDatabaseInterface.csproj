@@ -154,7 +154,7 @@
     </Compile>
     <Compile Include="Core\DomainTypes\Person.cs" />
     <Compile Include="Core\XmlDataProvider.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
