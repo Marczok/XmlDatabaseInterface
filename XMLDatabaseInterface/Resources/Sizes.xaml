@@ -1,0 +1,69 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    
+    <!--Border thickness-->
+    <Thickness x:Key="BorderThickness">0</Thickness>
+    <Thickness x:Key="GroupBoxBorderThickness">1</Thickness>
+    <Thickness x:Key="ScrollBarThumbBorderThickness">0</Thickness>
+    <Thickness x:Key="WizardBorderThickness">0</Thickness>
+    <Thickness x:Key="WizardPageBorderThickness">0</Thickness>
+    <Thickness x:Key="ToolTipBorderThickness">2</Thickness>
+    <Thickness x:Key="WireWizardGroupboxThickness">3</Thickness>
+
+    <!-- Margins -->
+    <Thickness x:Key="GroupBoxMargin">2</Thickness>
+    
+
+    <!--Font sizes-->
+    <sys:Double x:Key="FontSize">20</sys:Double>
+    <sys:Double x:Key="HighLightFontSize">25</sys:Double>
+
+    <!--Corner Radius-->
+    <CornerRadius x:Key="CornerRadius">5</CornerRadius>
+    <CornerRadius x:Key="ScrollBarThumbCornerRadius">2</CornerRadius>
+    
+    <!--Heights and widths-->
+    <sys:Double x:Key="WizardWindowsHeight">720</sys:Double>
+    <sys:Double x:Key="WizardWindowsWidth">1280</sys:Double>
+
+    <sys:Double x:Key="LoginWindowHeight">200</sys:Double>
+    <sys:Double x:Key="LoginWindowWidth">330</sys:Double>
+    
+    <sys:Double x:Key="MainWindowStripeHeight">60</sys:Double>
+
+    <GridLength x:Key="MainWindowLeftColumnWidth">350</GridLength>
+    <GridLength x:Key="MainWindowNotificationsWithPicturesColumnWidth">*</GridLength>
+    <GridLength x:Key="StripeMainWindowLeftColumnWidth">1*</GridLength>
+    <GridLength x:Key="StripeMainWindowCenterColumnWidth">3.5*</GridLength>
+    <GridLength x:Key="StripeMainWindowRightColumnWidth">1*</GridLength>
+    <GridLength x:Key="MainNotificationListColumnWidth">*</GridLength>
+    <GridLength x:Key="ImagesNotificationViewColumnWidth">730</GridLength>
+    
+    <sys:Double x:Key="ImageStripeHeight">84</sys:Double>
+    <sys:Double x:Key="ImageInStripeWidth">120</sys:Double>
+    
+    <sys:Double x:Key="IconButtonsHeight">40</sys:Double>
+    <sys:Double x:Key="IconButtonWidth">40</sys:Double>
+    
+    <Thickness x:Key="ImageButtonBorderThickness">2</Thickness>
+    
+    <!-- Notification Listbox -->
+    <ScaleTransform x:Key="NotificationListboxMOuseOverTransform"
+                    ScaleX="1.2"
+                    ScaleY="1.2"/>
+    
+    <!-- Top stripe buttons-->
+    <sys:Double x:Key="TopStripeButtonContentWidth">40</sys:Double>
+    <sys:Double x:Key="TopStripeButtonContentHeight">40</sys:Double>
+    <Thickness x:Key="TopStripeButtonContentMargin">10</Thickness>
+    <CornerRadius x:Key="TopStripeButtonCornerRadius"
+                  BottomLeft="0"
+                  BottomRight="0"
+                  TopLeft="5"
+                  TopRight="5" />
+    
+    <!--Menu item-->
+    <sys:Double x:Key="SeparatorHeight">2</sys:Double>
+    <Thickness x:Key="SeparatorBorderThickness">2</Thickness>
+</ResourceDictionary>
