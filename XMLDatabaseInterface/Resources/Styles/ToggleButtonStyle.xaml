@@ -26,13 +26,13 @@
                                  Value="True">
                             <Setter TargetName="border"
                                     Property="Background"
-                                    Value="{StaticResource SelectedBrush}"/>
+                                    Value="{StaticResource SecondaryBackgroundBrush}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver"
                                  Value="True">
                             <Setter TargetName="border"
                                     Property="Background"
-                                    Value="{StaticResource HighLightBrush}"/>
+                                    Value="{StaticResource MouseOverBrush}"/>
                         </Trigger>
                         <Trigger Property="IsMouseCaptured"
                                  Value="True">

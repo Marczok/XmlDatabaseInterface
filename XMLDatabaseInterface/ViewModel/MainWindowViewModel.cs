@@ -21,11 +21,14 @@ namespace XMLDatabaseInterface.ViewModel
         private double _progress;
         private WindowState _progressWindowState;
         private string _progressMessage;
-        private ObservableCollection<NameStatistic> _commonNames = 
+
+        private ObservableCollection<NameStatistic> _commonNames =
             new ObservableCollection<NameStatistic>();
 
         private ObservableCollection<SurenameStatistics> _commonSurenames =
             new ObservableCollection<SurenameStatistics>();
+
+        private ObservableCollection<Person> _birthdayCollection;
 
         public MainWindowViewModel()
         {
@@ -40,8 +43,9 @@ namespace XMLDatabaseInterface.ViewModel
                 data = await LoadDataAsync().ConfigureAwait(true);
                 Persons = new ObservableCollection<Person>(data);
 
-                CountCommonNamesCommand.Execute(null);
-                CountCommonSurenamesCommand.Execute(null);
+                ProcessCommonNamesCommand.Execute(null);
+                ProcessCommonSurenamesCommand.Execute(null);
+                ProcessBirthdayCommand.Execute(null);
                 ProgressWindowState = WindowState.Closed;
             }, () => MinDatabaseSize < DatabaseSize && DatabaseSize <= MaxDatabaseSize);
 
@@ -54,12 +58,13 @@ namespace XMLDatabaseInterface.ViewModel
                 var data = await LoadDataAsync().ConfigureAwait(true);
                 Persons = new ObservableCollection<Person>(data);
 
-                CountCommonNamesCommand.Execute(null);
-                CountCommonSurenamesCommand.Execute(null);
+                ProcessCommonNamesCommand.Execute(null);
+                ProcessCommonSurenamesCommand.Execute(null);
+                ProcessBirthdayCommand.Execute(null);
                 ProgressWindowState = WindowState.Closed;
             }, () => File.Exists(DataPath));
 
-            CountCommonNamesCommand = new RelayCommand(async () =>
+            ProcessCommonNamesCommand = new RelayCommand(async () =>
             {
                 IEnumerable<IGrouping<string, Person>> selected = null;
                 await Task.Run(() =>
@@ -72,9 +77,9 @@ namespace XMLDatabaseInterface.ViewModel
                 {
                     CommonNames.Add(new NameStatistic(item.Key, item.Count()));
                 }
-            });
+            }, () => Persons != null && Persons?.Count > 0);
 
-            CountCommonSurenamesCommand = new RelayCommand(async () =>
+            ProcessCommonSurenamesCommand = new RelayCommand(async () =>
             {
                 IEnumerable<IGrouping<string, Person>> selected = null;
                 await Task.Run(() =>
@@ -87,7 +92,20 @@ namespace XMLDatabaseInterface.ViewModel
                 {
                     CommonSurenames.Add(new SurenameStatistics(item.Key, item.Count()));
                 }
-            });
+            }, () => Persons != null && Persons?.Count > 0);
+
+            ProcessBirthdayCommand = new RelayCommand(async () =>
+            {
+                var today = DateTime.Now;
+                IEnumerable<Person> birthday = null;
+
+                await Task.Run(() =>
+                {
+                    birthday = Persons.Where(p => p.Birthdate.Day == today.Day && p.Birthdate.Month == today.Month);
+                }).ConfigureAwait(true);
+
+                BirthdayCollection = new ObservableCollection<Person>(birthday);
+            }, () => Persons != null && Persons?.Count > 0);
         }
 
         public string DataPath { get; } = "Resources/DataSources/data.xml";
@@ -96,8 +114,9 @@ namespace XMLDatabaseInterface.ViewModel
 
         public RelayCommand GenerateDataCommand { get; }
         public RelayCommand LoadDataCommand { get; }
-        public RelayCommand CountCommonNamesCommand { get; }
-        public RelayCommand CountCommonSurenamesCommand { get; }
+        public RelayCommand ProcessCommonNamesCommand { get; }
+        public RelayCommand ProcessCommonSurenamesCommand { get; }
+        public RelayCommand ProcessBirthdayCommand { get; }
 
         public int DatabaseSize
         {
@@ -133,6 +152,12 @@ namespace XMLDatabaseInterface.ViewModel
         {
             get => _commonSurenames;
             set => Set(() => CommonSurenames, ref _commonSurenames, value);
+        }
+
+        public ObservableCollection<Person> BirthdayCollection
+        {
+            get => _birthdayCollection;
+            set => Set(() => BirthdayCollection, ref _birthdayCollection, value);
         }
 
         public WindowState DataSourceWindowState

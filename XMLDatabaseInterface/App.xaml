@@ -6,8 +6,6 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Sizes.xaml"/>
                 <ResourceDictionary Source="Resources/Colors.xaml"/>
-                <ResourceDictionary Source="Resources/Styles/ContextMenuStyle.xaml"/>
-                <ResourceDictionary Source="Resources/Styles/MenuItemStyle.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/TextBlockStyle.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ButtonStyles.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/GroupBoxStyle.xaml"/>

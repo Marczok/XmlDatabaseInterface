@@ -11,8 +11,8 @@
                             Width="{TemplateBinding Width}"
                             Height="{TemplateBinding Height}"
                             CornerRadius="{StaticResource CornerRadius}"
-                            Background="{StaticResource LighterDarkHighLight}"
-                            BorderBrush="{StaticResource ToolTipBorderBrush}">
+                            Background="{StaticResource DarkerPrimaryBackgroundBrush}"
+                            BorderBrush="{StaticResource BorderBrush}">
                         <ContentPresenter Margin="4"
                                           HorizontalAlignment="Left"
                                           VerticalAlignment="Top" />

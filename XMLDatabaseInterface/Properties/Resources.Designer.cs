@@ -131,5 +131,14 @@ namespace XMLDatabaseInterface.Properties {
                 return ResourceManager.GetString("SavingData", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Today&apos;s Birthdays.
+        /// </summary>
+        public static string TodaysBirthdays {
+            get {
+                return ResourceManager.GetString("TodaysBirthdays", resourceCulture);
+            }
+        }
     }
 }

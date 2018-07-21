@@ -19,7 +19,7 @@
                               HorizontalAlignment="Center"
                               VerticalAlignment="Center"
                               Data="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" 
-                              Fill="{StaticResource ScrollBarBackgroundBrush}">
+                              Fill="{StaticResource SecondaryBackgroundBrush}">
                         </Path>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -27,13 +27,13 @@
                                  Value="True">
                             <Setter TargetName="Arrow"
                                     Property="Fill"
-                                    Value="{StaticResource ScrollBarMouseOverBrush}"/>
+                                    Value="{StaticResource MouseOverBrush}"/>
                         </Trigger>
                         <Trigger Property="IsMouseCaptured"
                                  Value="True">
                             <Setter TargetName="Arrow"
                                     Property="Fill"
-                                    Value="{StaticResource ScrollBarClickedBrush}"/>
+                                    Value="{StaticResource ClickBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled"
                                  Value="False">

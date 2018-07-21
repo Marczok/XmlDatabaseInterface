@@ -24,6 +24,9 @@ namespace Tests.UnitTests.ViewModels
         {
             Assert.NotNull(_vm.GenerateDataCommand);
             Assert.NotNull(_vm.LoadDataCommand);
+            Assert.NotNull(_vm.ProcessBirthdayCommand);
+            Assert.NotNull(_vm.ProcessCommonNamesCommand);
+            Assert.NotNull(_vm.ProcessCommonSurenamesCommand);
             Assert.False(File.Exists(_vm.DataPath));
         }
 

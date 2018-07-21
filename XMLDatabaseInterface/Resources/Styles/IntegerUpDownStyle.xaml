@@ -6,14 +6,14 @@
 
     <Style TargetType="{x:Type xctk:IntegerUpDown}">
         <Setter Property="Background"
-                Value="{StaticResource LighterDarkHighLight}"/>
+                Value="{StaticResource DarkerPrimaryBackgroundBrush}"/>
         <Setter Property="Foreground"
                 Value="{StaticResource TextBrush}"/>
     </Style>
     
     <Style TargetType="{x:Type xctk:ButtonSpinner}">
         <Setter Property="Background" 
-                Value="{StaticResource BackgroundBrush}" />
+                Value="{StaticResource PrimaryBackgroundBrush}" />
         <Setter Property="BorderBrush" 
                 Value="{StaticResource BorderBrush}" />
         <Setter Property="BorderThickness" 

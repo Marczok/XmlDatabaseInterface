@@ -3,7 +3,7 @@
     <Style TargetType="{x:Type TextBox}"
            BasedOn="{StaticResource {x:Type TextBox}}">
         <Setter Property="Background"
-                Value="{StaticResource LighterDarkHighLight}"/>
+                Value="{StaticResource DarkerPrimaryBackgroundBrush}"/>
         <Setter Property="Foreground"
                 Value="{StaticResource TextBrush}"/>
         <Setter Property="FontSize"

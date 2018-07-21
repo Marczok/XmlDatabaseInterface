@@ -3,21 +3,21 @@
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
     <Style TargetType="{x:Type xctk:ChildWindow}">
         <Setter Property="WindowBackground"
-                Value="{StaticResource ChildWindowBackground}"/>
+                Value="{StaticResource PrimaryBackgroundBrush}"/>
         <Setter Property="WindowInactiveBackground"
-                Value="{StaticResource ChildWindowBackground}"/>
+                Value="{StaticResource PrimaryBackgroundBrush}"/>
         <Setter Property="WindowBorderBrush"
-                Value="{StaticResource ChildWindowBordersBrush}"/>
+                Value="{StaticResource HighlightBrush}"/>
         <Setter Property="WindowBorderThickness"
                 Value="1"/>
         <Setter Property="Background"
-                Value="{StaticResource ChildWindowBackground}"/>
+                Value="{StaticResource PrimaryBackgroundBrush}"/>
         <Setter Property="BorderBrush"
                 Value="Transparent"/>
         <Setter Property="WindowStartupLocation"
                 Value="Center"/>
         <Setter Property="CaptionForeground"
-                Value="{StaticResource ChildWindowBordersBrush}"/>
+                Value="{StaticResource HighlightBrush}"/>
         <Setter Property="CaptionShadowBrush"
                 Value="Transparent"/>
         <Setter Property="CaptionFontSize"
@@ -26,7 +26,7 @@
             <Setter.Value>
                 <Style TargetType="{x:Type Button}">
                     <Setter Property="Background"
-                            Value="{StaticResource ChildWindowBackground}"/>
+                            Value="{StaticResource PrimaryBackgroundBrush}"/>
                     <Setter Property="BorderBrush"
                             Value="Transparent"/>
                     <Setter Property="Template">
@@ -43,14 +43,14 @@
                                           Y1="2.5"
                                           Y2="17.5"
                                           StrokeThickness="2"
-                                          Stroke="{StaticResource ChildWindowBordersBrush}"
+                                          Stroke="{StaticResource HighlightBrush}"
                                           Name="Line1"/>
                                     <Line X1="22.5"
                                           X2="7.5"
                                           Y1="17.5"
                                           Y2="2.5"
                                           StrokeThickness="2"
-                                          Stroke="{StaticResource ChildWindowBordersBrush}"
+                                          Stroke="{StaticResource HighlightBrush}"
                                           Name="Line2"/>
                                 </Canvas>
                                 <ControlTemplate.Triggers>

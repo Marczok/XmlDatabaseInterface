@@ -15,7 +15,7 @@
         Name="AppMainWindow" 
         d:DataContext="{d:DesignInstance viewModel:MainWindowViewModel}"
         DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
-        Background="{StaticResource BackgroundBrush}">
+        Background="{StaticResource PrimaryBackgroundBrush}">
     <Grid>
         <Grid.Resources>
             <xcdg:DataGridCollectionViewSource x:Key="MainDataGridSource"
@@ -75,20 +75,43 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </GroupBox>
+                <GroupBox Header="{x:Static properties:Resources.TodaysBirthdays}">
+                    <ListView ItemsSource="{Binding BirthdayCollection}"
+                              HorizontalContentAlignment="Stretch">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Name}"
+                                               TextAlignment="Center"
+                                               TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Surename}"
+                                               TextAlignment="Center"
+                                               TextWrapping="Wrap"
+                                               Grid.Column="1"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </GroupBox>
             </StackPanel>
 
             <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource MainDataGridSource}}"
                                   Grid.Column="1"
-                                  Background="{StaticResource BackgroundBrush}"
+                                  Background="{StaticResource PrimaryBackgroundBrush}"
                                   Foreground="{StaticResource TextBrush}"
                                   />
         </Grid>
 
 
-        <xctk:WindowContainer ModalBackgroundBrush="{StaticResource WindowContainerBrush}">
+        <xctk:WindowContainer ModalBackgroundBrush="{StaticResource ShadyTransparentBrush}">
             <xctk:ChildWindow WindowState="{Binding DataSourceWindowState}"
                               IsModal="True"
-                              Caption="{x:Static properties:Resources.DataSource}">
+                              Caption="{x:Static properties:Resources.DataSource}"
+                              CloseButtonVisibility="Collapsed">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <Button Content="{x:Static properties:Resources.GenerateDatabase}"
@@ -114,8 +137,8 @@
                                  Width="200"
                                  Minimum="0"
                                  Maximum="1"
-                                 Background="{StaticResource WindowContainerBrush}"
-                                 Foreground="{StaticResource HighLightBrush}"/>
+                                 Background="{StaticResource ShadyTransparentBrush}"
+                                 Foreground="{StaticResource MouseOverBrush}"/>
                     <TextBlock Text="{Binding ProgressMessage}"
                                TextAlignment="Center"
                                TextWrapping="Wrap"/>

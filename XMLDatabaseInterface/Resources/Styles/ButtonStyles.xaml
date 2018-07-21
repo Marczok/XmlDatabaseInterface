@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <Style TargetType="{x:Type Button}">
         <Setter Property="Background"
-                Value="{StaticResource ButtonBackground}"/>
+                Value="{StaticResource SecondaryBackgroundBrush}"/>
         <Setter Property="BorderThickness"
                 Value="{StaticResource BorderThickness}"/>
         <Setter Property="BorderBrush"
@@ -26,19 +26,64 @@
                                  Value="True">
                             <Setter TargetName="border"
                                     Property="Background"
-                                    Value="{StaticResource ButtonMouseOverBackgroundBrush}"/>
+                                    Value="{StaticResource MouseOverBrush}"/>
                         </Trigger>
                         <Trigger Property="IsMouseCaptured"
                                  Value="True">
                             <Setter TargetName="border"
                                     Property="Background"
-                                    Value="{StaticResource ButtonClickedBackgroundBrush}"/>
+                                    Value="{StaticResource ClickBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled"
                                  Value="False">
                             <Setter TargetName="border"
                                     Property="Background"
-                                    Value="{StaticResource ButtonDisabledBackgroundBrush}"/>
+                                    Value="{StaticResource DisableBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="{x:Type Button}"
+           x:Key="IconButton">
+        <Setter Property="SnapsToDevicePixels"
+                Value="True" />
+        <Setter Property="Focusable"
+                Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border x:Name="Border"
+                            Margin="1"
+                            BorderThickness="0"
+                            Background="Transparent">
+                        <Path x:Name="Arrow"
+                              HorizontalAlignment="Center"
+                              VerticalAlignment="Center"
+                              Data="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" 
+                              Fill="{StaticResource SecondaryBackgroundBrush}">
+                        </Path>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
+                                 Value="True">
+                            <Setter TargetName="Arrow"
+                                    Property="Fill"
+                                    Value="{StaticResource MouseOverBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseCaptured"
+                                 Value="True">
+                            <Setter TargetName="Arrow"
+                                    Property="Fill"
+                                    Value="{StaticResource ClickBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled"
+                                 Value="False">
+                            <Setter TargetName="Arrow"
+                                    Property="Fill"
+                                    Value="{StaticResource DisableBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
