@@ -50,7 +50,7 @@ namespace XMLDatabaseInterface.ViewModel
             }, () => File.Exists(DataPath));
         }
 
-        public string DataPath { get; } = $"Resources{Path.PathSeparator}DataSources{Path.PathSeparator}data.xml";
+        public string DataPath { get; } = "Resources/DataSources/data.xml";
 
         public RelayCommand GenerateDataCommand { get; }
         public RelayCommand LoadDataCommand { get; }
