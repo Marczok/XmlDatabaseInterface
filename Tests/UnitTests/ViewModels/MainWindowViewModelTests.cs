@@ -17,10 +17,6 @@ namespace Tests.UnitTests.ViewModels
         public MainWindowViewModelTests()
         {
             _vm = new MainWindowViewModel();
-            if (File.Exists(_vm.DataPath))
-            {
-                File.Delete(_vm.DataPath);
-            }
         }
 
         [Fact]
@@ -28,6 +24,7 @@ namespace Tests.UnitTests.ViewModels
         {
             Assert.NotNull(_vm.GenerateDataCommand);
             Assert.NotNull(_vm.LoadDataCommand);
+            Assert.False(File.Exists(_vm.DataPath));
         }
 
         [Fact]
@@ -40,6 +37,7 @@ namespace Tests.UnitTests.ViewModels
             Assert.True(File.Exists(_vm.DataPath));
             Assert.NotNull(_vm.Persons);
             Assert.Equal(size, _vm.Persons.Count);
+            File.Delete(_vm.DataPath);
         }
 
         [Fact]
@@ -73,6 +71,7 @@ namespace Tests.UnitTests.ViewModels
             await Task.Delay(5000).ConfigureAwait(true); //TODO: Wait for exact time of executing the command
             Assert.NotNull(_vm.Persons);
             Assert.Equal(size, _vm.Persons.Count);
+            File.Delete(_vm.DataPath);
         }
     }
 }
