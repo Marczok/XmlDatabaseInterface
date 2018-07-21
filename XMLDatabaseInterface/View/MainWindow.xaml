@@ -34,12 +34,10 @@
 
             <StackPanel Orientation="Vertical">
                 <GroupBox Header="{x:Static properties:Resources.MostCommonNames}">
-                    <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource NamesDataGridSource}}"
-                                          MaxGroupLevels="0"/>
+                    <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource NamesDataGridSource}}"/>
                 </GroupBox>
                 <GroupBox Header="{x:Static properties:Resources.MostCommonSurename}">
-                    <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource SurenamesDataGridSource}}"
-                                          MaxGroupLevels="0"/>
+                    <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource SurenamesDataGridSource}}"/>
                 </GroupBox>
             </StackPanel>
             <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource MainDataGridSource}}"
