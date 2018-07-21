@@ -74,21 +74,7 @@ namespace XMLDatabaseInterface.Core
             var serializer = new XmlSerializer(typeof(List<Person>));
             using (var writer = new StreamWriter(filename))
             {
-                if (progress != null)
-                {
-                    Task.Run(async () =>
-                    {
-                        progress.Report(0);
-                        while (writer.BaseStream.Position < writer.BaseStream.Length)
-                        {
-                            await Task.Delay(50).ConfigureAwait(false);
-                            progress.Report((double) writer.BaseStream.Position / writer.BaseStream.Length);
-                        }
-
-                        progress.Report(1);
-                    });
-                }
-
+                ReportStreamPosition(writer.BaseStream, progress);
                 serializer.Serialize(writer, data);
             }
         }
@@ -101,25 +87,29 @@ namespace XMLDatabaseInterface.Core
                 var reader = XmlReader.Create(stream);
                 if (serializer.CanDeserialize(reader))
                 {
-                    if (progress != null)
-                    {
-                        Task.Run(async () =>
-                        {
-                            progress.Report(0);
-                            while (stream.Position < stream.Length)
-                            {
-                                await Task.Delay(50).ConfigureAwait(false);
-                                progress.Report((double) stream.Position / stream.Length);
-                            }
-
-                            progress.Report(1);
-                        });
-                    }
-
+                    ReportStreamPosition(stream, progress);
                     return (List<Person>)serializer.Deserialize(reader);
                 }
 
                 throw new DirectoryNotFoundException("File cannot be found or deserialized");
+            }
+        }
+
+        private static void ReportStreamPosition(Stream stream, IProgress<double> progress)
+        {
+            if (progress != null)
+            {
+                Task.Run(async () =>
+                {
+                    progress.Report(0);
+                    while (stream.Position < stream.Length)
+                    {
+                        await Task.Delay(50).ConfigureAwait(false);
+                        progress.Report((double)stream.Position / stream.Length);
+                    }
+
+                    progress.Report(1);
+                });
             }
         }
     }

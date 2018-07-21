@@ -26,33 +26,27 @@ namespace XMLDatabaseInterface.ViewModel
             GenerateDataCommand = new RelayCommand(async () =>
             {
                 DataSourceWindowState = WindowState.Closed;
-                ProgressMessage = Resources.GeneratingData;
+
                 ProgressWindowState = WindowState.Open;
-                await Task.Run(() =>
-                {
-                    var data = XmlDataProvider.GenerateDatabase(
-                        DatabaseSize,
-                        new Progress<double>(progress => Progress = progress)
-                    );
 
-                    ProgressMessage = Resources.SavingData;
-                    XmlDataProvider.WriteDatabase(
-                        data,
-                        DataPath,
-                        new Progress<double>(progress => Progress = progress)
-                    );
-                }).ConfigureAwait(true);
-
-                ProgressMessage = Resources.ProcessingData;
-                await LoadDataAsync().ConfigureAwait(false);
+                var data = await GenerateDataAsync().ConfigureAwait(true);
+                await SaveDataAsync(data).ConfigureAwait(true);
+                data = await LoadDataAsync().ConfigureAwait(true);
+                Persons = new ObservableCollection<Person>(data);
 
                 ProgressWindowState = WindowState.Closed;
             }, () => 0 < DatabaseSize && DatabaseSize <= 500000);
 
             LoadDataCommand = new RelayCommand(async () =>
             {
-                await LoadDataAsync().ConfigureAwait(false);
                 DataSourceWindowState = WindowState.Closed;
+
+                ProgressWindowState = WindowState.Open;
+
+                var data = await LoadDataAsync().ConfigureAwait(true);
+                Persons = new ObservableCollection<Person>(data);
+
+                ProgressWindowState = WindowState.Closed;
             }, () => File.Exists(DataPath));
         }
 
@@ -97,18 +91,42 @@ namespace XMLDatabaseInterface.ViewModel
             set => Set(() => ProgressWindowState, ref _progressWindowState, value);
         }
 
-        private async Task LoadDataAsync()
+        private Task<IEnumerable<Person>> GenerateDataAsync()
         {
-            IEnumerable<Person> data = null;
-            await Task.Run(() =>
+            ProgressMessage = Resources.GeneratingData;
+            return Task.Run(() =>
             {
-                data = XmlDataProvider.ReadDatabase(
+                return XmlDataProvider.GenerateDatabase(
+                    DatabaseSize,
+                    new Progress<double>(progress => Progress = progress)
+                );
+            });
+        }
+
+        private Task SaveDataAsync(IEnumerable<Person> data)
+        {
+            ProgressMessage = Resources.SavingData;
+            return Task.Run(() =>
+            {
+                ProgressMessage = Resources.SavingData;
+                XmlDataProvider.WriteDatabase(
+                    data,
                     DataPath,
                     new Progress<double>(progress => Progress = progress)
                 );
-            }).ConfigureAwait(true);
+            });
+        }
 
-            Persons = new ObservableCollection<Person>(data);
+        private Task<IEnumerable<Person>> LoadDataAsync()
+        {
+            ProgressMessage = Resources.ProcessingData;
+            return Task.Run(() =>
+            {
+                return XmlDataProvider.ReadDatabase(
+                    DataPath,
+                    new Progress<double>(progress => Progress = progress)
+                );
+            });
         }
     }
 }
