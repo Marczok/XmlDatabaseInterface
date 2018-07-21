@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
@@ -75,7 +76,7 @@ namespace XMLDatabaseInterface.Core
             using (var writer = new StreamWriter(filename))
             {
                 ReportStreamPosition(writer.BaseStream, progress);
-                serializer.Serialize(writer, data);
+                serializer.Serialize(writer, data.ToList());
             }
         }
 

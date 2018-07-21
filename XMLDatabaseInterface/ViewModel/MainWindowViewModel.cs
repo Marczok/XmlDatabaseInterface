@@ -64,6 +64,13 @@ namespace XMLDatabaseInterface.ViewModel
                 ProgressWindowState = WindowState.Closed;
             }, () => File.Exists(DataPath));
 
+            SaveDataCommand = new RelayCommand(async () =>
+            {
+                ProgressWindowState = WindowState.Open;
+                await SaveDataAsync(Persons).ConfigureAwait(true);
+                ProgressWindowState = WindowState.Closed;
+            });
+
             ProcessCommonNamesCommand = new RelayCommand(async () =>
             {
                 IEnumerable<IGrouping<string, Person>> selected = null;
@@ -114,6 +121,7 @@ namespace XMLDatabaseInterface.ViewModel
 
         public RelayCommand GenerateDataCommand { get; }
         public RelayCommand LoadDataCommand { get; }
+        public RelayCommand SaveDataCommand { get; }
         public RelayCommand ProcessCommonNamesCommand { get; }
         public RelayCommand ProcessCommonSurenamesCommand { get; }
         public RelayCommand ProcessBirthdayCommand { get; }
