@@ -69,7 +69,7 @@ namespace XMLDatabaseInterface.ViewModel
                 ProgressWindowState = WindowState.Open;
                 await SaveDataAsync(Persons).ConfigureAwait(true);
                 ProgressWindowState = WindowState.Closed;
-            });
+            }, () => Persons != null && Persons?.Count > 0);
 
             ProcessCommonNamesCommand = new RelayCommand(async () =>
             {

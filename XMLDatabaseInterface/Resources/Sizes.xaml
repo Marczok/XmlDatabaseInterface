@@ -5,15 +5,10 @@
     <!--Border thickness-->
     <Thickness x:Key="BorderThickness">0</Thickness>
     <Thickness x:Key="GroupBoxBorderThickness">1</Thickness>
-    <Thickness x:Key="ScrollBarThumbBorderThickness">0</Thickness>
-    <Thickness x:Key="WizardBorderThickness">0</Thickness>
-    <Thickness x:Key="WizardPageBorderThickness">0</Thickness>
     <Thickness x:Key="ToolTipBorderThickness">2</Thickness>
-    <Thickness x:Key="WireWizardGroupboxThickness">3</Thickness>
 
     <!-- Margins -->
     <Thickness x:Key="GroupBoxMargin">2</Thickness>
-    
 
     <!--Font sizes-->
     <sys:Double x:Key="FontSize">12</sys:Double>

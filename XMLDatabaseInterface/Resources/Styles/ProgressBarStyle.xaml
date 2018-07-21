@@ -25,7 +25,7 @@
                         <StackPanel HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
                                     Orientation="Horizontal">
-                            <TextBlock  FontSize="24"
+                            <TextBlock  FontSize="{StaticResource HighLightFontSize}"
                                         FontWeight="Bold"
                                         Foreground="{TemplateBinding Foreground}"
                                         Text="{Binding ElementName=Pie, Path=Slice, StringFormat=#%}" />
