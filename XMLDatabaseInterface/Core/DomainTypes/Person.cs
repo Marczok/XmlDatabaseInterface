@@ -1,4 +1,5 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.Xml.Serialization;
 
 namespace XMLDatabaseInterface.Core.DomainTypes
 {
@@ -10,7 +11,7 @@ namespace XMLDatabaseInterface.Core.DomainTypes
 
         [XmlAttribute] public string Address { get; set; }
 
-        [XmlAttribute] public string Birthdate { get; set; }
+        [XmlAttribute] public DateTime Birthdate { get; set; }
 
         protected bool Equals(Person other)
         {

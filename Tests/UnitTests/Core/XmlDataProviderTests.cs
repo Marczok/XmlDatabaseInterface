@@ -22,7 +22,7 @@ namespace Tests.UnitTests.Core
             Assert.NotEmpty(item.Name);
             Assert.NotEmpty(item.Surename);
             Assert.NotEmpty(item.Address);
-            Assert.NotEmpty(item.Birthdate);
+            Assert.NotEmpty(item.Birthdate.ToShortDateString());
         }
 
         [Fact]
@@ -58,7 +58,7 @@ namespace Tests.UnitTests.Core
             Assert.NotEmpty(deserializedItem.Name);
             Assert.NotEmpty(deserializedItem.Surename);
             Assert.NotEmpty(deserializedItem.Address);
-            Assert.NotEmpty(deserializedItem.Birthdate);
+            Assert.NotEmpty(deserializedItem.Birthdate.ToShortDateString());
             Assert.Equal(generatedItem, deserializedItem);
             
             File.Delete(filename);

@@ -61,7 +61,7 @@ namespace XMLDatabaseInterface.Core
                     Name = name,
                     Surename = surename,
                     Address = address,
-                    Birthdate = dateTime.ToShortDateString()
+                    Birthdate = dateTime
                 });
                 progress?.Report((double)i / size);
             }
