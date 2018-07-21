@@ -6,6 +6,7 @@
         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
         xmlns:viewModel="clr-namespace:XMLDatabaseInterface.ViewModel"
+        xmlns:properties="clr-namespace:XMLDatabaseInterface.Properties"
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="450" 
@@ -25,18 +26,19 @@
             <xctk:ChildWindow WindowState="Open"
                               WindowStartupLocation="Center"
                               IsModal="True"
-                              Caption="Data source">
+                              Caption="{x:Static properties:Resources.DataSource}">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
-                        <Button Content="Generate database"
+                        <Button Content="{x:Static properties:Resources.GenerateDatabase}"
                                 Margin="2"
-                                Command="{Binding GenerateData}"/>
+                                Command="{Binding GenerateDataCommand}"/>
                         <xctk:IntegerUpDown Margin="2"
                                             Width="100"
                                             Value="{Binding DatabaseSize, Mode=TwoWay}"/>
                     </StackPanel>
-                    <Button Content="Load saved database"
-                            Margin="2"/>
+                    <Button Content="{x:Static properties:Resources.LoadData}"
+                            Margin="2"
+                            Command="{Binding LoadDataCommand}"/>
                 </StackPanel>
             </xctk:ChildWindow>
         </xctk:WindowContainer>

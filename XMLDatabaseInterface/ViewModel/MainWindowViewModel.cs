@@ -1,5 +1,6 @@
 using System;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Reactive.Linq;
 using System.Windows.Data;
 using GalaSoft.MvvmLight;
@@ -18,18 +19,18 @@ namespace XMLDatabaseInterface.ViewModel
 
         public MainWindowViewModel()
         {
-            GenerateData = new RelayCommand(() =>
+            GenerateDataCommand = new RelayCommand(() =>
             {
                 var data = XmlDataProvider.GenerateDatabase(DatabaseSize);
                 XmlDataProvider.WriteDatabase(data, DataPath);
-                LoadData.Execute(null);
+                LoadData();
             }, () => 0 < DatabaseSize && DatabaseSize < 1000000);
 
-            LoadData = new RelayCommand(() => { Persons = new ObservableCollection<Person>(XmlDataProvider.ReadDatabase(DataPath)); });
+            LoadDataCommand = new RelayCommand(LoadData, () => File.Exists(DataPath));
         }
 
-        public RelayCommand GenerateData { get; }
-        public RelayCommand LoadData { get; }
+        public RelayCommand GenerateDataCommand { get; }
+        public RelayCommand LoadDataCommand { get; }
         public int DatabaseSize
         {
             get => _databaseSize;
@@ -41,5 +42,12 @@ namespace XMLDatabaseInterface.ViewModel
             get => _persons;
             private set => Set(() => Persons, ref _persons, value);
         }
+
+        private void LoadData()
+        {
+            Persons = new ObservableCollection<Person>(XmlDataProvider.ReadDatabase(DataPath));
+        }
+
+
     }
 }
