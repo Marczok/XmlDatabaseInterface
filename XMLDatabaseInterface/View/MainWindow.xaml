@@ -21,10 +21,9 @@
                                                Source="{Binding Persons}"/>
         </Grid.Resources>
         <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource DataGridSource}}"/>
-        
+
         <xctk:WindowContainer ModalBackgroundBrush="{StaticResource WindowContainerBrush}">
             <xctk:ChildWindow WindowState="{Binding DataSourceWindowState}"
-                              WindowStartupLocation="Center"
                               IsModal="True"
                               Caption="{x:Static properties:Resources.DataSource}">
                 <StackPanel Orientation="Vertical">
@@ -39,6 +38,22 @@
                     <Button Content="{x:Static properties:Resources.LoadData}"
                             Margin="2"
                             Command="{Binding LoadDataCommand}"/>
+                </StackPanel>
+            </xctk:ChildWindow>
+            <xctk:ChildWindow Style="{StaticResource TransparentChildWindow}"
+                              WindowState="{Binding ProgressWindowState}"
+                              IsModal="True">
+                <StackPanel Orientation="Vertical">
+                    <ProgressBar Value="{Binding Progress}"
+                                 Height="200"
+                                 Width="200"
+                                 Minimum="0"
+                                 Maximum="1"
+                                 Background="{StaticResource WindowContainerBrush}"
+                                 Foreground="{StaticResource HighLightBrush}"/>
+                    <TextBlock Text="{Binding ProgressMessage}"
+                               TextAlignment="Center"
+                               TextWrapping="Wrap"/>
                 </StackPanel>
             </xctk:ChildWindow>
         </xctk:WindowContainer>

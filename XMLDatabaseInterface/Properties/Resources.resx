@@ -123,4 +123,7 @@
   <data name="DataSource" xml:space="preserve">
     <value>Data Source</value>
   </data>
+  <data name="GeneratingData" xml:space="preserve">
+    <value>Generating Data...</value>
+  </data>
 </root>

@@ -71,4 +71,26 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <Style TargetType="{x:Type xctk:ChildWindow}"
+           x:Key="TransparentChildWindow">
+        <Setter Property="WindowBackground"
+                Value="Transparent"/>
+        <Setter Property="WindowInactiveBackground"
+                Value="Transparent"/>
+        <Setter Property="WindowBorderBrush"
+                Value="Transparent"/>
+        <Setter Property="Background"
+                Value="Transparent"/>
+        <Setter Property="BorderBrush"
+                Value="Transparent"/>
+        <Setter Property="WindowStartupLocation"
+                Value="Center"/>
+        <Setter Property="CaptionForeground"
+                Value="Transparent"/>
+        <Setter Property="CaptionShadowBrush"
+                Value="Transparent"/>
+        <Setter Property="CloseButtonVisibility"
+                Value="Collapsed"/>
+    </Style>
 </ResourceDictionary>

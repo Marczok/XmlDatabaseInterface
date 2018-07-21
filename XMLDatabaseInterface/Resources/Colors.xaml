@@ -18,7 +18,7 @@
     <!--============================-->
 
     <SolidColorBrush x:Key="SelectedBrush" Color="{StaticResource LightBlue}"/>
-    <SolidColorBrush x:Key="HighLightBrush" Color="{StaticResource HighLightGray}"/>
+    <SolidColorBrush x:Key="HighLightBrush" Color="{StaticResource MediumBlue}"/>
     <SolidColorBrush x:Key="ClickBrush" Color="{StaticResource HighLightBlue}"/>
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource DarkGray}"/>
     <SolidColorBrush x:Key="DisableColor" Color="{StaticResource LightGray}"/>

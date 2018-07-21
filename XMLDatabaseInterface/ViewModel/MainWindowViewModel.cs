@@ -7,29 +7,37 @@ using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using Xceed.Wpf.Toolkit;
 using XMLDatabaseInterface.Core.DomainTypes;
+using XMLDatabaseInterface.Properties;
 using XmlDataProvider = XMLDatabaseInterface.Core.XmlDataProvider;
 
 namespace XMLDatabaseInterface.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
-
-        private int _databaseSize = 3000;
+        private int _databaseSize = 5000;
         private ObservableCollection<Person> _persons;
         private WindowState _dataSourceWindowState = WindowState.Open;
+        private double _progress;
+        private WindowState _progressWindowState;
+        private string _progressMessage;
 
         public MainWindowViewModel()
         {
             GenerateDataCommand = new RelayCommand(async () =>
             {
+                DataSourceWindowState = WindowState.Closed;
+                ProgressMessage = Resources.GeneratingData;
+                ProgressWindowState = WindowState.Open;
                 await Task.Run(() =>
                 {
-                    var data = XmlDataProvider.GenerateDatabase(DatabaseSize, new Progress<double>(Console.WriteLine));
+                    var data = XmlDataProvider.GenerateDatabase(DatabaseSize,
+                        new Progress<double>(progress => Progress = progress));
                     XmlDataProvider.WriteDatabase(data, DataPath);
                 }).ConfigureAwait(true);
+                ProgressWindowState = WindowState.Closed;
                 await LoadDataAsync().ConfigureAwait(false);
-                DataSourceWindowState = WindowState.Closed;
-            }, () => 0 < DatabaseSize && DatabaseSize < 1000000);
+
+            }, () => 0 < DatabaseSize && DatabaseSize <= 500000);
 
             LoadDataCommand = new RelayCommand(async () =>
             {
@@ -49,6 +57,18 @@ namespace XMLDatabaseInterface.ViewModel
             set => Set(() => DatabaseSize, ref _databaseSize, value);
         }
 
+        public double Progress
+        {
+            get => _progress;
+            set => Set(() => Progress, ref _progress, value);
+        }
+
+        public string ProgressMessage
+        {
+            get => _progressMessage;
+            set => Set(() => ProgressMessage, ref _progressMessage, value);
+        }
+
         public ObservableCollection<Person> Persons
         {
             get => _persons;
@@ -59,6 +79,12 @@ namespace XMLDatabaseInterface.ViewModel
         {
             get => _dataSourceWindowState;
             set => Set(() => DataSourceWindowState, ref _dataSourceWindowState, value);
+        }
+
+        public WindowState ProgressWindowState
+        {
+            get => _progressWindowState;
+            set => Set(() => ProgressWindowState, ref _progressWindowState, value);
         }
 
         private async Task LoadDataAsync()

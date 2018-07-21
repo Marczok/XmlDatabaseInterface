@@ -79,6 +79,15 @@ namespace XMLDatabaseInterface.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Generating Data....
+        /// </summary>
+        public static string GeneratingData {
+            get {
+                return ResourceManager.GetString("GeneratingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Load Database.
         /// </summary>
         public static string LoadData {

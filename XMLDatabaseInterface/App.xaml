@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="Resources/Styles/TextBoxStyle.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ToggleButtonStyle.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ToolTipStyle.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/ProgressBarStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
