@@ -1,8 +1,7 @@
-using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Reactive.Linq;
-using System.Windows.Data;
+using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 using XMLDatabaseInterface.Core.DomainTypes;
@@ -10,7 +9,6 @@ using XmlDataProvider = XMLDatabaseInterface.Core.XmlDataProvider;
 
 namespace XMLDatabaseInterface.ViewModel
 {
-
     public class MainWindowViewModel : ViewModelBase
     {
         private const string DataPath = "Resources/data.xml";
@@ -19,18 +17,24 @@ namespace XMLDatabaseInterface.ViewModel
 
         public MainWindowViewModel()
         {
-            GenerateDataCommand = new RelayCommand(() =>
+            GenerateDataCommand = new RelayCommand(async () =>
             {
-                var data = XmlDataProvider.GenerateDatabase(DatabaseSize);
-                XmlDataProvider.WriteDatabase(data, DataPath);
-                LoadData();
+                await Task.Run(() =>
+                {
+                    var data = XmlDataProvider.GenerateDatabase(DatabaseSize);
+                    XmlDataProvider.WriteDatabase(data, DataPath);
+                }).ConfigureAwait(true);
+                await LoadDataAsync().ConfigureAwait(false);
             }, () => 0 < DatabaseSize && DatabaseSize < 1000000);
 
-            LoadDataCommand = new RelayCommand(LoadData, () => File.Exists(DataPath));
+            LoadDataCommand = new RelayCommand(async () =>
+                    await LoadDataAsync().ConfigureAwait(false),
+                () => File.Exists(DataPath));
         }
 
         public RelayCommand GenerateDataCommand { get; }
         public RelayCommand LoadDataCommand { get; }
+
         public int DatabaseSize
         {
             get => _databaseSize;
@@ -43,11 +47,11 @@ namespace XMLDatabaseInterface.ViewModel
             private set => Set(() => Persons, ref _persons, value);
         }
 
-        private void LoadData()
+        private async Task LoadDataAsync()
         {
-            Persons = new ObservableCollection<Person>(XmlDataProvider.ReadDatabase(DataPath));
+            IEnumerable<Person> data = null;
+            await Task.Run(() => { data = XmlDataProvider.ReadDatabase(DataPath); }).ConfigureAwait(true);
+            Persons = new ObservableCollection<Person>(data);
         }
-
-
     }
 }
