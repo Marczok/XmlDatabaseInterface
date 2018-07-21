@@ -12,7 +12,7 @@ namespace XMLDatabaseInterface.ViewModel
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        private const string DataPath = "Resources/data.xml";
+
         private int _databaseSize = 3000;
         private ObservableCollection<Person> _persons;
         private WindowState _dataSourceWindowState = WindowState.Open;
@@ -36,6 +36,8 @@ namespace XMLDatabaseInterface.ViewModel
                 DataSourceWindowState = WindowState.Closed;
             }, () => File.Exists(DataPath));
         }
+
+        public string DataPath { get; } = $"Resources{Path.PathSeparator}DataSources{Path.PathSeparator}data.xml";
 
         public RelayCommand GenerateDataCommand { get; }
         public RelayCommand LoadDataCommand { get; }
