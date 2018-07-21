@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -23,7 +24,7 @@ namespace XMLDatabaseInterface.ViewModel
             {
                 await Task.Run(() =>
                 {
-                    var data = XmlDataProvider.GenerateDatabase(DatabaseSize);
+                    var data = XmlDataProvider.GenerateDatabase(DatabaseSize, new Progress<double>(Console.WriteLine));
                     XmlDataProvider.WriteDatabase(data, DataPath);
                 }).ConfigureAwait(true);
                 await LoadDataAsync().ConfigureAwait(false);

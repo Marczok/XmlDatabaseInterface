@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using XMLDatabaseInterface.Core;
 using Xunit;
@@ -15,7 +16,7 @@ namespace Tests.UnitTests.Core
         public void ProviderGenerateDataProperly(int index)
         {
             const int size = 100;
-            var data = XmlDataProvider.GenerateDatabase(size).ToList();
+            var data = XmlDataProvider.GenerateDatabase(size, new Progress<double>(Console.WriteLine)).ToList();
             Assert.Equal(size, data.Count);
             var item = data[index];
             Assert.NotEmpty(item.Name);
@@ -29,7 +30,7 @@ namespace Tests.UnitTests.Core
         {
             const int size = 100000;
             const string filename = "data.xml";
-            var data = XmlDataProvider.GenerateDatabase(size);
+            var data = XmlDataProvider.GenerateDatabase(size, new Progress<double>(Console.WriteLine));
             XmlDataProvider.WriteDatabase(data, filename);
             Assert.True(File.Exists(filename));
             File.Delete(filename);
@@ -46,7 +47,7 @@ namespace Tests.UnitTests.Core
         {
             const string filename = "data.xml";
             const int size = 500;
-            var data = XmlDataProvider.GenerateDatabase(size).ToList();
+            var data = XmlDataProvider.GenerateDatabase(size, new Progress<double>(Console.WriteLine)).ToList();
             var generatedItem = data[index];
             XmlDataProvider.WriteDatabase(data, filename);
             Assert.True(File.Exists(filename));

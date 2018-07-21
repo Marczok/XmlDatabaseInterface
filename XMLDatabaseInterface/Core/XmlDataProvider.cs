@@ -31,7 +31,7 @@ namespace XMLDatabaseInterface.Core
             "Koln, Kasse Strasse"
         };
 
-        public static IEnumerable<Person> GenerateDatabase(int size)
+        public static IEnumerable<Person> GenerateDatabase(int size, IProgress<double> progress)
         {
             var firstNames = File.ReadAllLines("Resources/DataSources/FirstNames.txt");
             var lastNames = File.ReadAllLines("Resources/DataSources/Surnames.txt");
@@ -44,7 +44,7 @@ namespace XMLDatabaseInterface.Core
             {
                 var dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
                 dateTime = dateTime.AddSeconds(rnd.Next(1532031622)).ToLocalTime();
-                
+
                 string name = string.Empty, surename = string.Empty;
                 while (name == string.Empty || surename == string.Empty)
                 {
@@ -61,6 +61,7 @@ namespace XMLDatabaseInterface.Core
                     Address = address,
                     Birthdate = dateTime.ToShortDateString()
                 });
+                progress.Report((double)i / size);
             }
 
             return persons;
