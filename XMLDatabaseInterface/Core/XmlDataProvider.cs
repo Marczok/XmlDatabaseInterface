@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using XMLDatabaseInterface.Core.DomainTypes;
@@ -68,6 +69,30 @@ namespace XMLDatabaseInterface.Core
             return persons;
         }
 
+        public static void WriteDatabase(IEnumerable<Person> data, string filename, IProgress<double> progress = null)
+        {
+            var serializer = new XmlSerializer(typeof(List<Person>));
+            using (var writer = new StreamWriter(filename))
+            {
+                if (progress != null)
+                {
+                    Task.Run(async () =>
+                    {
+                        progress.Report(0);
+                        while (writer.BaseStream.Position < writer.BaseStream.Length)
+                        {
+                            await Task.Delay(50).ConfigureAwait(false);
+                            progress.Report((double) writer.BaseStream.Position / writer.BaseStream.Length);
+                        }
+
+                        progress.Report(1);
+                    });
+                }
+
+                serializer.Serialize(writer, data);
+            }
+        }
+
         public static IEnumerable<Person> ReadDatabase(string filename, IProgress<double> progress = null)
         {
             var serializer = new XmlSerializer(typeof(List<Person>));
@@ -76,21 +101,26 @@ namespace XMLDatabaseInterface.Core
                 var reader = XmlReader.Create(stream);
                 if (serializer.CanDeserialize(reader))
                 {
+                    if (progress != null)
+                    {
+                        Task.Run(async () =>
+                        {
+                            progress.Report(0);
+                            while (stream.Position < stream.Length)
+                            {
+                                await Task.Delay(50).ConfigureAwait(false);
+                                progress.Report((double) stream.Position / stream.Length);
+                            }
+
+                            progress.Report(1);
+                        });
+                    }
+
                     return (List<Person>)serializer.Deserialize(reader);
                 }
 
                 throw new DirectoryNotFoundException("File cannot be found or deserialized");
             }
         }
-
-        public static void WriteDatabase(IEnumerable<Person> data, string filename)
-        {
-            var serializer = new XmlSerializer(typeof(List<Person>));
-            using (var writer = new StreamWriter(filename))
-            {
-                serializer.Serialize(writer, data);
-            }
-        }
-
     }
 }

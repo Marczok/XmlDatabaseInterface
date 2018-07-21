@@ -126,4 +126,10 @@
   <data name="GeneratingData" xml:space="preserve">
     <value>Generating Data...</value>
   </data>
+  <data name="SavingData" xml:space="preserve">
+    <value>Saving Data...</value>
+  </data>
+  <data name="ProcessingData" xml:space="preserve">
+    <value>Processing Data...</value>
+  </data>
 </root>

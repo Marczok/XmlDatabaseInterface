@@ -95,5 +95,23 @@ namespace XMLDatabaseInterface.Properties {
                 return ResourceManager.GetString("LoadData", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Processing Data....
+        /// </summary>
+        public static string ProcessingData {
+            get {
+                return ResourceManager.GetString("ProcessingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving Data....
+        /// </summary>
+        public static string SavingData {
+            get {
+                return ResourceManager.GetString("SavingData", resourceCulture);
+            }
+        }
     }
 }
