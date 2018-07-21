@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
@@ -31,7 +32,7 @@ namespace XMLDatabaseInterface.Core
             "Koln, Kasse Strasse"
         };
 
-        public static IEnumerable<Person> GenerateDatabase(int size, IProgress<double> progress)
+        public static IEnumerable<Person> GenerateDatabase(int size, IProgress<double> progress = null)
         {
             var firstNames = File.ReadAllLines("Resources/DataSources/FirstNames.txt");
             var lastNames = File.ReadAllLines("Resources/DataSources/Surnames.txt");
@@ -61,13 +62,13 @@ namespace XMLDatabaseInterface.Core
                     Address = address,
                     Birthdate = dateTime.ToShortDateString()
                 });
-                progress.Report((double)i / size);
+                progress?.Report((double)i / size);
             }
 
             return persons;
         }
 
-        public static IEnumerable<Person> ReadDatabase(string filename)
+        public static IEnumerable<Person> ReadDatabase(string filename, IProgress<double> progress = null)
         {
             var serializer = new XmlSerializer(typeof(List<Person>));
             using (var stream = new FileStream(filename, FileMode.Open))
