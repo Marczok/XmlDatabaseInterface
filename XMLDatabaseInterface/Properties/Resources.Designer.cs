@@ -61,6 +61,15 @@ namespace XMLDatabaseInterface.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Count.
+        /// </summary>
+        public static string Count {
+            get {
+                return ResourceManager.GetString("Count", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data Source.
         /// </summary>
         public static string DataSource {
@@ -115,6 +124,15 @@ namespace XMLDatabaseInterface.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Processing Data....
         /// </summary>
         public static string ProcessingData {
@@ -129,6 +147,15 @@ namespace XMLDatabaseInterface.Properties {
         public static string SavingData {
             get {
                 return ResourceManager.GetString("SavingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surename.
+        /// </summary>
+        public static string Surename {
+            get {
+                return ResourceManager.GetString("Surename", resourceCulture);
             }
         }
         

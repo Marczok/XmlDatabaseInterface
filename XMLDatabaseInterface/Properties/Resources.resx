@@ -141,4 +141,13 @@
   <data name="TodaysBirthdays" xml:space="preserve">
     <value>Today's Birthdays</value>
   </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Count" xml:space="preserve">
+    <value>Count</value>
+  </data>
+  <data name="Surename" xml:space="preserve">
+    <value>Surename</value>
+  </data>
 </root>

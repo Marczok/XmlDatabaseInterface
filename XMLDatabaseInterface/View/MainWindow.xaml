@@ -7,6 +7,7 @@
         xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"
         xmlns:viewModel="clr-namespace:XMLDatabaseInterface.ViewModel"
         xmlns:properties="clr-namespace:XMLDatabaseInterface.Properties"
+        xmlns:view="clr-namespace:XMLDatabaseInterface.View"
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="450" 
@@ -31,28 +32,7 @@
 
             <StackPanel Orientation="Vertical"
                         HorizontalAlignment="Stretch">
-                <GroupBox Header="{x:Static properties:Resources.MostCommonNames}">
-                    <ListView ItemsSource="{Binding CommonNames}"
-                              HorizontalContentAlignment="Stretch">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="{Binding Name}"
-                                               TextAlignment="Center"
-                                               TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding Count}"
-                                               TextAlignment="Center"
-                                               TextWrapping="Wrap"
-                                               Grid.Column="1"/>
-                                </Grid>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </GroupBox>
+                <view:CommonNamesView/>
                 <GroupBox Header="{x:Static properties:Resources.MostCommonSurename}">
                     <ListView ItemsSource="{Binding CommonSurenames}"
                               HorizontalContentAlignment="Stretch">
