@@ -19,46 +19,5 @@
     <CornerRadius x:Key="ScrollBarThumbCornerRadius">2</CornerRadius>
     
     <!--Heights and widths-->
-    <sys:Double x:Key="WizardWindowsHeight">720</sys:Double>
-    <sys:Double x:Key="WizardWindowsWidth">1280</sys:Double>
-
-    <sys:Double x:Key="LoginWindowHeight">200</sys:Double>
-    <sys:Double x:Key="LoginWindowWidth">330</sys:Double>
     
-    <sys:Double x:Key="MainWindowStripeHeight">60</sys:Double>
-
-    <GridLength x:Key="MainWindowLeftColumnWidth">350</GridLength>
-    <GridLength x:Key="MainWindowNotificationsWithPicturesColumnWidth">*</GridLength>
-    <GridLength x:Key="StripeMainWindowLeftColumnWidth">1*</GridLength>
-    <GridLength x:Key="StripeMainWindowCenterColumnWidth">3.5*</GridLength>
-    <GridLength x:Key="StripeMainWindowRightColumnWidth">1*</GridLength>
-    <GridLength x:Key="MainNotificationListColumnWidth">*</GridLength>
-    <GridLength x:Key="ImagesNotificationViewColumnWidth">730</GridLength>
-    
-    <sys:Double x:Key="ImageStripeHeight">84</sys:Double>
-    <sys:Double x:Key="ImageInStripeWidth">120</sys:Double>
-    
-    <sys:Double x:Key="IconButtonsHeight">40</sys:Double>
-    <sys:Double x:Key="IconButtonWidth">40</sys:Double>
-    
-    <Thickness x:Key="ImageButtonBorderThickness">2</Thickness>
-    
-    <!-- Notification Listbox -->
-    <ScaleTransform x:Key="NotificationListboxMOuseOverTransform"
-                    ScaleX="1.2"
-                    ScaleY="1.2"/>
-    
-    <!-- Top stripe buttons-->
-    <sys:Double x:Key="TopStripeButtonContentWidth">40</sys:Double>
-    <sys:Double x:Key="TopStripeButtonContentHeight">40</sys:Double>
-    <Thickness x:Key="TopStripeButtonContentMargin">10</Thickness>
-    <CornerRadius x:Key="TopStripeButtonCornerRadius"
-                  BottomLeft="0"
-                  BottomRight="0"
-                  TopLeft="5"
-                  TopRight="5" />
-    
-    <!--Menu item-->
-    <sys:Double x:Key="SeparatorHeight">2</sys:Double>
-    <Thickness x:Key="SeparatorBorderThickness">2</Thickness>
 </ResourceDictionary>
