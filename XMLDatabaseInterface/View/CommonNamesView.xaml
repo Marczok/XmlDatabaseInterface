@@ -52,8 +52,8 @@
                         C473.197,326.043,471.903,312.157,464.635,301.184z"
                         Grid.Row="0"
                         Grid.Column="1"
-                        Width="20"
-                        Height="20"
+                        Width="15"
+                        Height="15"
                         HorizontalAlignment="Right"
                         />
                 <ListView ItemsSource="{Binding CommonNames}"

@@ -52,22 +52,23 @@
                 Value="True" />
         <Setter Property="Focusable"
                 Value="True" />
+        <Setter Property="Background"
+                Value="{StaticResource PrimaryBackgroundBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border x:Name="Border"
-                            Margin="1"
                             BorderThickness="0"
-                            Background="Transparent">
+                            Background="{TemplateBinding Background}">
                         <Viewbox Width="{TemplateBinding Width}"
                                  Height="{TemplateBinding Height}"
-                                 Stretch="Uniform">
-                        <Path x:Name="Arrow"
-                              HorizontalAlignment="Center"
-                              VerticalAlignment="Center"
-                              Data="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" 
-                              Fill="{StaticResource SecondaryBackgroundBrush}"
-                              />
+                                 Stretch="Uniform"
+                                 Margin="0">
+                            <Path x:Name="Arrow"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  Data="{Binding Content, RelativeSource={RelativeSource TemplatedParent}}" 
+                                  Fill="{StaticResource SecondaryBackgroundBrush}"/>
                         </Viewbox>
                     </Border>
                     <ControlTemplate.Triggers>
