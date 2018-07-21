@@ -23,7 +23,7 @@
         <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource DataGridSource}}"/>
         
         <xctk:WindowContainer ModalBackgroundBrush="{StaticResource WindowContainerBrush}">
-            <xctk:ChildWindow WindowState="Open"
+            <xctk:ChildWindow WindowState="{Binding DataSourceWindowState}"
                               WindowStartupLocation="Center"
                               IsModal="True"
                               Caption="{x:Static properties:Resources.DataSource}">

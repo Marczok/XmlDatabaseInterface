@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
+using Xceed.Wpf.Toolkit;
 using XMLDatabaseInterface.Core.DomainTypes;
 using XmlDataProvider = XMLDatabaseInterface.Core.XmlDataProvider;
 
@@ -14,6 +15,7 @@ namespace XMLDatabaseInterface.ViewModel
         private const string DataPath = "Resources/data.xml";
         private int _databaseSize = 3000;
         private ObservableCollection<Person> _persons;
+        private WindowState _dataSourceWindowState = WindowState.Open;
 
         public MainWindowViewModel()
         {
@@ -25,11 +27,14 @@ namespace XMLDatabaseInterface.ViewModel
                     XmlDataProvider.WriteDatabase(data, DataPath);
                 }).ConfigureAwait(true);
                 await LoadDataAsync().ConfigureAwait(false);
+                DataSourceWindowState = WindowState.Closed;
             }, () => 0 < DatabaseSize && DatabaseSize < 1000000);
 
             LoadDataCommand = new RelayCommand(async () =>
-                    await LoadDataAsync().ConfigureAwait(false),
-                () => File.Exists(DataPath));
+            {
+                await LoadDataAsync().ConfigureAwait(false);
+                DataSourceWindowState = WindowState.Closed;
+            }, () => File.Exists(DataPath));
         }
 
         public RelayCommand GenerateDataCommand { get; }
@@ -45,6 +50,12 @@ namespace XMLDatabaseInterface.ViewModel
         {
             get => _persons;
             private set => Set(() => Persons, ref _persons, value);
+        }
+
+        public WindowState DataSourceWindowState
+        {
+            get => _dataSourceWindowState;
+            set => Set(() => DataSourceWindowState, ref _dataSourceWindowState, value);
         }
 
         private async Task LoadDataAsync()
