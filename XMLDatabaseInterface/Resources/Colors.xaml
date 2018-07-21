@@ -21,7 +21,7 @@
     <SolidColorBrush x:Key="HighLightBrush" Color="{StaticResource MediumBlue}"/>
     <SolidColorBrush x:Key="ClickBrush" Color="{StaticResource HighLightBlue}"/>
     <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource DarkGray}"/>
-    <SolidColorBrush x:Key="DisableColor" Color="{StaticResource LightGray}"/>
+    <SolidColorBrush x:Key="DisableBrush" Color="{StaticResource LightGray}"/>
     <SolidColorBrush x:Key="TextBrush" Color="{StaticResource Text}"/>
     <SolidColorBrush x:Key="IconBrush" Color="{StaticResource Text}"/>
     <SolidColorBrush x:Key="IconDisabledBrush" Color="{StaticResource LightGray}"/>
@@ -43,11 +43,13 @@
 
     <!-- Scrollbar -->
     <SolidColorBrush x:Key="ScrollBarBackgroundBrush" 
-                     Color="{StaticResource HighLightGray}"/>
+                     Color="{StaticResource Text}"/>
     <SolidColorBrush x:Key="ScrollBarMouseOverBrush" 
-                     Color="{StaticResource LightGray}"/>
+                     Color="{StaticResource LightBlue}"/>
     <SolidColorBrush x:Key="ScrollBarClickedBrush" 
-                     Color="{StaticResource GrayBlue}"/>
+                     Color="{StaticResource MediumBlue}"/>
+    <SolidColorBrush x:Key="ScrollBarDisableBrush" 
+                     Color="{StaticResource LightGray}"/>
     
     <!-- Child window -->
     <SolidColorBrush x:Key="ChildWindowBordersBrush"

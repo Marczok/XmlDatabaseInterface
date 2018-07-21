@@ -11,12 +11,14 @@
                 <ResourceDictionary Source="Resources/Styles/TextBlockStyle.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ButtonStyles.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/GroupBoxStyle.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/RepeatButtonStyle.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ScrollBarStyle.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ChildWindowStyle.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/TextBoxStyle.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ToggleButtonStyle.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ToolTipStyle.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ProgressBarStyle.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/IntegerUpDownStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

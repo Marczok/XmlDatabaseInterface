@@ -33,7 +33,9 @@
                                 Command="{Binding GenerateDataCommand}"/>
                         <xctk:IntegerUpDown Margin="2"
                                             Width="100"
-                                            Value="{Binding DatabaseSize, Mode=TwoWay}"/>
+                                            Value="{Binding DatabaseSize, Mode=TwoWay}"
+                                            Minimum="{Binding MinDatabaseSize}"
+                                            Maximum="{Binding MaxDatabaseSize}"/>
                     </StackPanel>
                     <Button Content="{x:Static properties:Resources.LoadData}"
                             Margin="2"

@@ -35,7 +35,7 @@ namespace XMLDatabaseInterface.ViewModel
                 Persons = new ObservableCollection<Person>(data);
 
                 ProgressWindowState = WindowState.Closed;
-            }, () => 0 < DatabaseSize && DatabaseSize <= 500000);
+            }, () => MinDatabaseSize < DatabaseSize && DatabaseSize <= MaxDatabaseSize);
 
             LoadDataCommand = new RelayCommand(async () =>
             {
@@ -51,6 +51,8 @@ namespace XMLDatabaseInterface.ViewModel
         }
 
         public string DataPath { get; } = "Resources/DataSources/data.xml";
+        public int MinDatabaseSize { get; } = 0;
+        public int MaxDatabaseSize { get; } = 500000;
 
         public RelayCommand GenerateDataCommand { get; }
         public RelayCommand LoadDataCommand { get; }

@@ -44,7 +44,7 @@
                                  Value="False">
                             <Setter TargetName="border"
                                     Property="Background"
-                                    Value="{StaticResource DisableColor}"/>
+                                    Value="{StaticResource DisableBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
