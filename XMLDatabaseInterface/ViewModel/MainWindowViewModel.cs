@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -20,6 +21,11 @@ namespace XMLDatabaseInterface.ViewModel
         private double _progress;
         private WindowState _progressWindowState;
         private string _progressMessage;
+        private ObservableCollection<NameStatistic> _commonNames = 
+            new ObservableCollection<NameStatistic>();
+
+        private ObservableCollection<SurenameStatistics> _commonSurenames =
+            new ObservableCollection<SurenameStatistics>();
 
         public MainWindowViewModel()
         {
@@ -34,6 +40,8 @@ namespace XMLDatabaseInterface.ViewModel
                 data = await LoadDataAsync().ConfigureAwait(true);
                 Persons = new ObservableCollection<Person>(data);
 
+                CountCommonNamesCommand.Execute(null);
+                CountCommonSurenamesCommand.Execute(null);
                 ProgressWindowState = WindowState.Closed;
             }, () => MinDatabaseSize < DatabaseSize && DatabaseSize <= MaxDatabaseSize);
 
@@ -46,8 +54,40 @@ namespace XMLDatabaseInterface.ViewModel
                 var data = await LoadDataAsync().ConfigureAwait(true);
                 Persons = new ObservableCollection<Person>(data);
 
+                CountCommonNamesCommand.Execute(null);
+                CountCommonSurenamesCommand.Execute(null);
                 ProgressWindowState = WindowState.Closed;
             }, () => File.Exists(DataPath));
+
+            CountCommonNamesCommand = new RelayCommand(async () =>
+            {
+                IEnumerable<IGrouping<string, Person>> selected = null;
+                await Task.Run(() =>
+                {
+                    selected = Persons.GroupBy(p => p.Name).OrderByDescending(grp => grp.Count()).Take(10);
+                }).ConfigureAwait(true);
+
+                CommonNames.Clear();
+                foreach (var item in selected)
+                {
+                    CommonNames.Add(new NameStatistic(item.Key, item.Count()));
+                }
+            });
+
+            CountCommonSurenamesCommand = new RelayCommand(async () =>
+            {
+                IEnumerable<IGrouping<string, Person>> selected = null;
+                await Task.Run(() =>
+                {
+                    selected = Persons.GroupBy(p => p.Surename).OrderByDescending(grp => grp.Count()).Take(10);
+                }).ConfigureAwait(true);
+
+                CommonNames.Clear();
+                foreach (var item in selected)
+                {
+                    CommonSurenames.Add(new SurenameStatistics(item.Key, item.Count()));
+                }
+            });
         }
 
         public string DataPath { get; } = "Resources/DataSources/data.xml";
@@ -56,6 +96,8 @@ namespace XMLDatabaseInterface.ViewModel
 
         public RelayCommand GenerateDataCommand { get; }
         public RelayCommand LoadDataCommand { get; }
+        public RelayCommand CountCommonNamesCommand { get; }
+        public RelayCommand CountCommonSurenamesCommand { get; }
 
         public int DatabaseSize
         {
@@ -79,6 +121,18 @@ namespace XMLDatabaseInterface.ViewModel
         {
             get => _persons;
             private set => Set(() => Persons, ref _persons, value);
+        }
+
+        public ObservableCollection<NameStatistic> CommonNames
+        {
+            get => _commonNames;
+            set => Set(() => CommonNames, ref _commonNames, value);
+        }
+
+        public ObservableCollection<SurenameStatistics> CommonSurenames
+        {
+            get => _commonSurenames;
+            set => Set(() => CommonSurenames, ref _commonSurenames, value);
         }
 
         public WindowState DataSourceWindowState

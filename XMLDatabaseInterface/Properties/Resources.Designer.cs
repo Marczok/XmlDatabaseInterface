@@ -97,6 +97,24 @@ namespace XMLDatabaseInterface.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 10 Most Common Names.
+        /// </summary>
+        public static string MostCommonNames {
+            get {
+                return ResourceManager.GetString("MostCommonNames", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 10 Most Common Surenames.
+        /// </summary>
+        public static string MostCommonSurename {
+            get {
+                return ResourceManager.GetString("MostCommonSurename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Processing Data....
         /// </summary>
         public static string ProcessingData {

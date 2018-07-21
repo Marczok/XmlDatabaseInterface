@@ -164,7 +164,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Core\DomainTypes\NameStatistic.cs" />
     <Compile Include="Core\DomainTypes\Person.cs" />
+    <Compile Include="Core\DomainTypes\SurenameStatistics.cs" />
     <Compile Include="Core\XmlDataProvider.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />

@@ -14,13 +14,38 @@
         WindowStartupLocation="CenterScreen"
         Name="AppMainWindow" 
         d:DataContext="{d:DesignInstance viewModel:MainWindowViewModel}"
-        DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+        DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
+        Background="{StaticResource BackgroundBrush}">
     <Grid>
         <Grid.Resources>
-            <xcdg:DataGridCollectionViewSource x:Key="DataGridSource"
+            <xcdg:DataGridCollectionViewSource x:Key="MainDataGridSource"
                                                Source="{Binding Persons}"/>
+            <xcdg:DataGridCollectionViewSource x:Key="NamesDataGridSource"
+                                               Source="{Binding CommonNames}"/>
+            <xcdg:DataGridCollectionViewSource x:Key="SurenamesDataGridSource"
+                                               Source="{Binding CommonSurenames}"/>
         </Grid.Resources>
-        <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource DataGridSource}}"/>
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Vertical">
+                <GroupBox Header="{x:Static properties:Resources.MostCommonNames}">
+                    <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource NamesDataGridSource}}"
+                                          MaxGroupLevels="0"/>
+                </GroupBox>
+                <GroupBox Header="{x:Static properties:Resources.MostCommonSurename}">
+                    <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource SurenamesDataGridSource}}"
+                                          MaxGroupLevels="0"/>
+                </GroupBox>
+            </StackPanel>
+            <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource MainDataGridSource}}"
+                                  Grid.Column="1"/>
+        </Grid>
+
 
         <xctk:WindowContainer ModalBackgroundBrush="{StaticResource WindowContainerBrush}">
             <xctk:ChildWindow WindowState="{Binding DataSourceWindowState}"

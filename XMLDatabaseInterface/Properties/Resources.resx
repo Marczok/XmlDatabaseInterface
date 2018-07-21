@@ -132,4 +132,10 @@
   <data name="ProcessingData" xml:space="preserve">
     <value>Processing Data...</value>
   </data>
+  <data name="MostCommonNames" xml:space="preserve">
+    <value>10 Most Common Names</value>
+  </data>
+  <data name="MostCommonSurename" xml:space="preserve">
+    <value>10 Most Common Surenames</value>
+  </data>
 </root>
