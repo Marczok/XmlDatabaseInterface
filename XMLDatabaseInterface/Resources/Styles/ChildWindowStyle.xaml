@@ -21,7 +21,7 @@
         <Setter Property="CaptionShadowBrush"
                 Value="Transparent"/>
         <Setter Property="CaptionFontSize"
-                Value="20"/>
+                Value="{StaticResource FontSize}"/>
         <Setter Property="CloseButtonStyle">
             <Setter.Value>
                 <Style TargetType="{x:Type Button}">

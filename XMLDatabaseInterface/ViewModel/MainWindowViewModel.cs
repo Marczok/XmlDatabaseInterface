@@ -82,7 +82,7 @@ namespace XMLDatabaseInterface.ViewModel
                     selected = Persons.GroupBy(p => p.Surename).OrderByDescending(grp => grp.Count()).Take(10);
                 }).ConfigureAwait(true);
 
-                CommonNames.Clear();
+                CommonSurenames.Clear();
                 foreach (var item in selected)
                 {
                     CommonSurenames.Add(new SurenameStatistics(item.Key, item.Count()));

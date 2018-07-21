@@ -16,7 +16,7 @@
     
 
     <!--Font sizes-->
-    <sys:Double x:Key="FontSize">20</sys:Double>
+    <sys:Double x:Key="FontSize">12</sys:Double>
     <sys:Double x:Key="HighLightFontSize">25</sys:Double>
 
     <!--Corner Radius-->

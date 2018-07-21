@@ -19,6 +19,7 @@
                 <ResourceDictionary Source="Resources/Styles/ToolTipStyle.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/ProgressBarStyle.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/IntegerUpDownStyle.xaml"/>
+                <ResourceDictionary Source="Resources/Styles/ListViewStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

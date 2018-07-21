@@ -20,28 +20,68 @@
         <Grid.Resources>
             <xcdg:DataGridCollectionViewSource x:Key="MainDataGridSource"
                                                Source="{Binding Persons}"/>
-            <xcdg:DataGridCollectionViewSource x:Key="NamesDataGridSource"
-                                               Source="{Binding CommonNames}"/>
-            <xcdg:DataGridCollectionViewSource x:Key="SurenamesDataGridSource"
-                                               Source="{Binding CommonSurenames}"/>
         </Grid.Resources>
         
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"
+                                  MinWidth="200"/>
+                <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
 
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical"
+                        HorizontalAlignment="Stretch">
                 <GroupBox Header="{x:Static properties:Resources.MostCommonNames}">
-                    <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource NamesDataGridSource}}"/>
+                    <ListView ItemsSource="{Binding CommonNames}"
+                              HorizontalContentAlignment="Stretch">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Name}"
+                                               TextAlignment="Center"
+                                               TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Count}"
+                                               TextAlignment="Center"
+                                               TextWrapping="Wrap"
+                                               Grid.Column="1"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </GroupBox>
                 <GroupBox Header="{x:Static properties:Resources.MostCommonSurename}">
-                    <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource SurenamesDataGridSource}}"/>
+                    <ListView ItemsSource="{Binding CommonSurenames}"
+                              HorizontalContentAlignment="Stretch">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding Surename}"
+                                               TextAlignment="Center"
+                                               TextWrapping="Wrap"/>
+                                    <TextBlock Text="{Binding Count}"
+                                               TextAlignment="Center"
+                                               TextWrapping="Wrap"
+                                               Grid.Column="1"/>
+                                </Grid>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
                 </GroupBox>
             </StackPanel>
+
             <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource MainDataGridSource}}"
-                                  Grid.Column="1"/>
+                                  Grid.Column="1"
+                                  Background="{StaticResource BackgroundBrush}"
+                                  Foreground="{StaticResource TextBrush}"
+                                  />
         </Grid>
 
 

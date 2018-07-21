@@ -12,7 +12,7 @@
     <Color x:Key="Orange" A="255" R="236" G="116" B="5"/>
     <Color x:Key="Green" A="255" R="120" G="178" B="43"/>
     <Color x:Key="BlackTransparent" A="150" R="0" G="0" B="0" />
-    <Color x:Key="Text" A="255" R="255" G="255" B="255"/>
+    <Color x:Key="Text" A="255" R="0" G="0" B="0"/>
     <Color x:Key="Dark" A="255" R="11" G="14" B="21"/>
     <Color x:Key="LighterDark" A="255" R="33" G="42" B="63"/>
     <!--============================-->
@@ -20,7 +20,7 @@
     <SolidColorBrush x:Key="SelectedBrush" Color="{StaticResource LightBlue}"/>
     <SolidColorBrush x:Key="HighLightBrush" Color="{StaticResource MediumBlue}"/>
     <SolidColorBrush x:Key="ClickBrush" Color="{StaticResource HighLightBlue}"/>
-    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource DarkGray}"/>
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource LightGray}"/>
     <SolidColorBrush x:Key="DisableBrush" Color="{StaticResource LightGray}"/>
     <SolidColorBrush x:Key="TextBrush" Color="{StaticResource Text}"/>
     <SolidColorBrush x:Key="IconBrush" Color="{StaticResource Text}"/>
