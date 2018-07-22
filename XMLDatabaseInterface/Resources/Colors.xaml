@@ -1,31 +1,28 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!--Colors-->
-    <Color x:Key="LightBlue" A="255" R="84" G="110" B="186"/>
-    <Color x:Key="MediumBlue" A="255" R="52" G="82" B="171"/>
-    <Color x:Key="DarkBlue" A="255" R="21" G="56" B="159"/>
-    
-    <Color x:Key="LightGray" A="255" R="206" G="209" B="222"/>
-    <Color x:Key="MediumGray" A="255" R="198" G="200" B="206"/>
-    <Color x:Key="DarkGray" A="255" R="141" G="144" B="150"/>
+    <Color x:Key="LightYellow" A="255" R="255" G="230" B="176"/>
+    <Color x:Key="MediumYellow" A="255" R="255" G="216" B="133"/>
+    <Color x:Key="DarkYellow" A="255" R="255" G="205" B="97"/>
     
     <Color x:Key="LighOrange" A="255" R="255" G="173" B="97"/> 
     <Color x:Key="MediumOrange" A="255" R="253" G="149" B="54"/>
     <Color x:Key="DarkOrange" A="255" R="236" G="116" B="5"/>
+
     <Color x:Key="BlackTransparent" A="150" R="0" G="0" B="0" />
     <Color x:Key="Text" A="255" R="0" G="0" B="0"/>
     <!--============================-->
 
-    <SolidColorBrush x:Key="PrimaryBackgroundBrush" Color="{StaticResource LightGray}"/>
-    <SolidColorBrush x:Key="DarkerPrimaryBackgroundBrush" Color="{StaticResource MediumGray}"/>
-    <SolidColorBrush x:Key="DisableBrush" Color="{StaticResource MediumGray}"/>
+    <SolidColorBrush x:Key="PrimaryBackgroundBrush" Color="{StaticResource LightYellow}"/>
+    <SolidColorBrush x:Key="DarkerPrimaryBackgroundBrush" Color="{StaticResource MediumYellow}"/>
+    <SolidColorBrush x:Key="DisableBrush" Color="{StaticResource DarkYellow}"/>
     
     <SolidColorBrush x:Key="SecondaryBackgroundBrush" Color="{StaticResource DarkOrange}"/>
     <SolidColorBrush x:Key="MouseOverBrush" Color="{StaticResource LighOrange}"/>
     <SolidColorBrush x:Key="ClickBrush" Color="{StaticResource MediumOrange}"/>
     
     <SolidColorBrush x:Key="TextBrush" Color="{StaticResource Text}"/>
-    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource DarkGray}"/>
+    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource DarkYellow}"/>
     
     <SolidColorBrush x:Key="HighlightBrush" Color="{StaticResource DarkOrange}" />
     
