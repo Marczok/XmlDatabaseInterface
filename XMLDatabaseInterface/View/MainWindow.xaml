@@ -23,7 +23,7 @@
             <xcdg:DataGridCollectionViewSource x:Key="MainDataGridSource"
                                                Source="{Binding Database}"/>
         </Grid.Resources>
-        
+
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"
@@ -39,15 +39,15 @@
                 <view:CommonSurenamesView/>
                 <view:BirthdayTodayView/>
             </StackPanel>
-            
-            
+
+
 
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                
+
                 <!--Icon buttons-->
                 <!--<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> 
                      from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> 
@@ -82,7 +82,7 @@
                             Height="15"
                             Margin="2"/>
                 </StackPanel>
-                
+
                 <!--Main datagrid-->
                 <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource MainDataGridSource}}"
                                       Grid.Row="1"                  
@@ -93,35 +93,40 @@
                                       Margin="2"
                                       SelectionMode="Multiple"
                                       x:Name="MainDataGrid"/>
-                
+
             </Grid>
         </Grid>
 
 
         <!--Window container-->
         <xctk:WindowContainer ModalBackgroundBrush="{StaticResource ShadyTransparentBrush}">
-            
+
             <!--Data source window-->
             <xctk:ChildWindow WindowState="{Binding DataSourceWindowState}"
                               IsModal="True"
                               Caption="{x:Static properties:Resources.DataSource}">
-                <StackPanel Orientation="Vertical">
+                <StackPanel Orientation="Vertical"
+                            Margin="5">
                     <StackPanel Orientation="Horizontal">
-                        <Button Content="{x:Static properties:Resources.GenerateDatabase}"
-                                Margin="2"
-                                Command="{Binding GenerateDataCommand}"/>
+                        <Button Margin="2"
+                                Command="{Binding GenerateDataCommand}">
+                            <TextBlock Text="{x:Static properties:Resources.GenerateDatabase}"
+                                       Foreground="{StaticResource SecondaryTextBrush}"/>
+                        </Button>
                         <xctk:IntegerUpDown Margin="2"
                                             Width="100"
                                             Value="{Binding DatabaseSize, Mode=TwoWay}"
                                             Minimum="{Binding MinDatabaseSize}"
                                             Maximum="{Binding MaxDatabaseSize}"/>
                     </StackPanel>
-                    <Button Content="{x:Static properties:Resources.LoadData}"
-                            Margin="2"
-                            Command="{Binding LoadDataCommand}"/>
+                    <Button Margin="2"
+                            Command="{Binding LoadDataCommand}">
+                        <TextBlock Text="{x:Static properties:Resources.LoadData}"
+                                   Foreground="{StaticResource SecondaryTextBrush}"/>
+                    </Button>
                 </StackPanel>
             </xctk:ChildWindow>
-            
+
             <!--Progress window-->
             <xctk:ChildWindow Style="{StaticResource TransparentChildWindow}"
                               WindowState="{Binding ProgressWindowState}"
@@ -141,7 +146,7 @@
                                Foreground="{StaticResource HighlightBrush}"/>
                 </StackPanel>
             </xctk:ChildWindow>
-            
+
             <!--Add window-->
             <xctk:ChildWindow WindowState="{Binding AddWindowState}"
                               IsModal="True"
@@ -191,12 +196,14 @@
                                          Value="{Binding AddDate, Mode=TwoWay}"
                                          Margin="2"
                                          Background="{StaticResource PrimaryBackgroundBrush}"/>
-                    <Button Content="{x:Static properties:Resources.AddPerson}"
-                            Command="{Binding AddPersonCommand}"
+                    <Button Command="{Binding AddPersonCommand}"
                             Grid.Column="0"
                             Grid.Row="4"
                             Grid.ColumnSpan="2"
-                            Margin="2"/>
+                            Margin="2">
+                        <TextBlock Text="{x:Static properties:Resources.AddPerson}"
+                                   Foreground="{StaticResource SecondaryTextBrush}"/>
+                    </Button>
                 </Grid>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Closed">

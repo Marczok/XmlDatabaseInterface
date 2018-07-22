@@ -19,7 +19,8 @@
                             CornerRadius="{StaticResource CornerRadius}">
                         <ContentPresenter HorizontalAlignment="Center" 
                                           VerticalAlignment="Center"
-                                          Margin="5"/>
+                                          Margin="5"
+                                          />
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver"
