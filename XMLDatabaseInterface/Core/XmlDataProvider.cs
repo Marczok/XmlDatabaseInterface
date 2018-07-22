@@ -94,7 +94,7 @@ namespace XMLDatabaseInterface.Core
             var enumerable = data.ToList();
             using (var writer = new StreamWriter(filename))
             {
-                ReportStreamPosition(writer.BaseStream, progress);
+                ReportStreamPosition(writer.BaseStream, progress); // TODO: Fix save report, it's not work
                 serializer.Serialize(writer, enumerable);
             }
 

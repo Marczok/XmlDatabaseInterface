@@ -20,5 +20,5 @@
     <CornerRadius x:Key="ScrollBarThumbCornerRadius">2</CornerRadius>
     
     <!--Heights and widths-->
-    
+    <sys:Double x:Key="GridIconsSize">20</sys:Double>
 </ResourceDictionary>
