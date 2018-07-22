@@ -9,7 +9,9 @@
     <Color x:Key="MediumGray" A="255" R="198" G="200" B="206"/>
     <Color x:Key="DarkGray" A="255" R="141" G="144" B="150"/>
     
-    <Color x:Key="Orange" A="255" R="236" G="116" B="5"/>
+    <Color x:Key="LighOrange" A="255" R="255" G="173" B="97"/> 
+    <Color x:Key="MediumOrange" A="255" R="253" G="149" B="54"/>
+    <Color x:Key="DarkOrange" A="255" R="236" G="116" B="5"/>
     <Color x:Key="BlackTransparent" A="150" R="0" G="0" B="0" />
     <Color x:Key="Text" A="255" R="0" G="0" B="0"/>
     <!--============================-->
@@ -18,15 +20,14 @@
     <SolidColorBrush x:Key="DarkerPrimaryBackgroundBrush" Color="{StaticResource MediumGray}"/>
     <SolidColorBrush x:Key="DisableBrush" Color="{StaticResource MediumGray}"/>
     
-    <SolidColorBrush x:Key="SecondaryTextBrush" Color="{StaticResource LightGray}"/>
-    <SolidColorBrush x:Key="SecondaryBackgroundBrush" Color="{StaticResource DarkBlue}"/>
-    <SolidColorBrush x:Key="MouseOverBrush" Color="{StaticResource LightBlue}"/>
-    <SolidColorBrush x:Key="ClickBrush" Color="{StaticResource MediumBlue}"/>
+    <SolidColorBrush x:Key="SecondaryBackgroundBrush" Color="{StaticResource DarkOrange}"/>
+    <SolidColorBrush x:Key="MouseOverBrush" Color="{StaticResource LighOrange}"/>
+    <SolidColorBrush x:Key="ClickBrush" Color="{StaticResource MediumOrange}"/>
     
     <SolidColorBrush x:Key="TextBrush" Color="{StaticResource Text}"/>
     <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource DarkGray}"/>
     
-    <SolidColorBrush x:Key="HighlightBrush" Color="{StaticResource Orange}" />
+    <SolidColorBrush x:Key="HighlightBrush" Color="{StaticResource DarkOrange}" />
     
     <SolidColorBrush x:Key="ShadyTransparentBrush" Color="{StaticResource BlackTransparent}"/>
 </ResourceDictionary>

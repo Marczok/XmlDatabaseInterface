@@ -109,10 +109,8 @@
                             Margin="5">
                     <StackPanel Orientation="Horizontal">
                         <Button Margin="2"
-                                Command="{Binding GenerateDataCommand}">
-                            <TextBlock Text="{x:Static properties:Resources.GenerateDatabase}"
-                                       Foreground="{StaticResource SecondaryTextBrush}"/>
-                        </Button>
+                                Command="{Binding GenerateDataCommand}"
+                                Content="{x:Static properties:Resources.GenerateDatabase}"/>
                         <xctk:IntegerUpDown Margin="2"
                                             Width="100"
                                             Value="{Binding DatabaseSize, Mode=TwoWay}"
@@ -120,10 +118,8 @@
                                             Maximum="{Binding MaxDatabaseSize}"/>
                     </StackPanel>
                     <Button Margin="2"
-                            Command="{Binding LoadDataCommand}">
-                        <TextBlock Text="{x:Static properties:Resources.LoadData}"
-                                   Foreground="{StaticResource SecondaryTextBrush}"/>
-                    </Button>
+                            Command="{Binding LoadDataCommand}"
+                            Content="{x:Static properties:Resources.LoadData}"/>
                 </StackPanel>
             </xctk:ChildWindow>
 
@@ -200,10 +196,8 @@
                             Grid.Column="0"
                             Grid.Row="4"
                             Grid.ColumnSpan="2"
-                            Margin="2">
-                        <TextBlock Text="{x:Static properties:Resources.AddPerson}"
-                                   Foreground="{StaticResource SecondaryTextBrush}"/>
-                    </Button>
+                            Margin="2"
+                            Content="{x:Static properties:Resources.AddPerson}"/>
                 </Grid>
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Closed">
