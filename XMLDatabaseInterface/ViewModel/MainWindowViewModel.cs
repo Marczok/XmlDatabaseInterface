@@ -113,6 +113,14 @@ namespace XMLDatabaseInterface.ViewModel
 
                 BirthdayCollection = new ObservableCollection<Person>(birthday);
             }, () => Persons != null && Persons?.Count > 0);
+
+            DeletePersonCommand = new RelayCommand<IEnumerable<Person>>(selected =>
+            {
+                foreach (var item in selected)
+                {
+                    Persons.Remove(item);
+                }
+            }, selected => Persons != null && Persons?.Count > 0 && selected != null && selected.Any());
         }
 
         public string DataPath { get; } = "Resources/DataSources/data.xml";
@@ -125,6 +133,7 @@ namespace XMLDatabaseInterface.ViewModel
         public RelayCommand ProcessCommonNamesCommand { get; }
         public RelayCommand ProcessCommonSurenamesCommand { get; }
         public RelayCommand ProcessBirthdayCommand { get; }
+        public RelayCommand<IEnumerable<Person>> DeletePersonCommand { get; }
 
         public int DatabaseSize
         {
