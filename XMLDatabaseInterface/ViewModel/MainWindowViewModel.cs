@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -114,13 +115,24 @@ namespace XMLDatabaseInterface.ViewModel
                 BirthdayCollection = new ObservableCollection<Person>(birthday);
             }, () => Persons != null && Persons?.Count > 0);
 
-            DeletePersonCommand = new RelayCommand<IEnumerable<Person>>(selected =>
+            DeletePersonCommand = new RelayCommand<IList>(selected =>
             {
+                // Collection need to be copyed, other way will change it, if we delete something, and it will throw exeption
+                var remove = new List<Person>(selected.Count);
                 foreach (var item in selected)
                 {
-                    Persons.Remove(item);
+                    if (item is Person person)
+                    {
+
+                        remove.Add(person);
+                    }
                 }
-            }, selected => Persons != null && Persons?.Count > 0 && selected != null && selected.Any());
+
+                foreach (var person in remove)
+                {
+                    Persons.Remove(person);
+                }
+            }, selected => selected != null && selected?.Count > 0 && Persons != null && Persons.Count > 0);
         }
 
         public string DataPath { get; } = "Resources/DataSources/data.xml";
@@ -133,7 +145,7 @@ namespace XMLDatabaseInterface.ViewModel
         public RelayCommand ProcessCommonNamesCommand { get; }
         public RelayCommand ProcessCommonSurenamesCommand { get; }
         public RelayCommand ProcessBirthdayCommand { get; }
-        public RelayCommand<IEnumerable<Person>> DeletePersonCommand { get; }
+        public RelayCommand<IList> DeletePersonCommand { get; }
 
         public int DatabaseSize
         {
