@@ -126,6 +126,9 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTests\Core\XmlDataProviderTests.cs" />
+    <Compile Include="UnitTests\ViewModels\BirthdayTodayViewModelTests.cs" />
+    <Compile Include="UnitTests\ViewModels\CommonNamesViewModelTests.cs" />
+    <Compile Include="UnitTests\ViewModels\CommonSurenamesViewModelTests.cs" />
     <Compile Include="UnitTests\ViewModels\MainWindowViewModelTests.cs" />
   </ItemGroup>
   <ItemGroup>
