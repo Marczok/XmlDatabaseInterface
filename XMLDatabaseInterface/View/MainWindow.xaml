@@ -87,14 +87,16 @@
                 <!--Main datagrid-->
                 <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource MainDataGridSource}}"
                                       Grid.Row="1"                  
-                                      Background="{StaticResource PrimaryBackgroundBrush}"
-                                      Foreground="{StaticResource TextBrush}"
                                       HorizontalAlignment="Stretch"
                                       HorizontalContentAlignment="Stretch"
                                       Margin="2"
                                       SelectionMode="Multiple"
-                                      x:Name="MainDataGrid"
-                                      MinWidth="200"/>
+                                      x:Name="MainDataGrid">
+                    <xcdg:DataGridControl.View>
+                        <xcdg:TableView ColumnStretchMode="All"
+                                        ColumnStretchMinWidth="100"/>
+                    </xcdg:DataGridControl.View>
+                </xcdg:DataGridControl>
 
             </Grid>
         </Grid>
