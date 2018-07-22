@@ -40,21 +40,23 @@ namespace XMLDatabaseInterface.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
-
+            
             SimpleIoc.Default.Register<MainWindowViewModel>();
+            SimpleIoc.Default.Register<IDataProvider, MainWindowViewModel>();
+            SimpleIoc.Default.Register<CommonNamesViewModel>();
+            SimpleIoc.Default.Register<CommonSurenamesViewModel>();
+            SimpleIoc.Default.Register<BirthdayTodayViewModel>();
         }
 
-        public MainWindowViewModel Main
-        {
-            get
-            {
-                return ServiceLocator.Current.GetInstance<MainWindowViewModel>();
-            }
-        }
-        
+        public MainWindowViewModel Main => ServiceLocator.Current.GetInstance<MainWindowViewModel>();
+        public CommonNamesViewModel CommonNames => ServiceLocator.Current.GetInstance<CommonNamesViewModel>();
+        public CommonSurenamesViewModel CommonSurenames => ServiceLocator.Current.GetInstance<CommonSurenamesViewModel>();
+        public BirthdayTodayViewModel BirthdayToday => ServiceLocator.Current.GetInstance<BirthdayTodayViewModel>();
+
+
         public static void Cleanup()
         {
-            // TODO Clear the ViewModels
+            SimpleIoc.Default.Reset();
         }
     }
 }

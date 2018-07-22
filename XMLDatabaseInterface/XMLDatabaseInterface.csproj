@@ -176,6 +176,10 @@
     <Compile Include="Core\DomainTypes\Person.cs" />
     <Compile Include="Core\DomainTypes\SurenameStatistics.cs" />
     <Compile Include="Core\XmlDataProvider.cs" />
+    <Compile Include="ViewModel\BirthdayTodayViewModel.cs" />
+    <Compile Include="ViewModel\CommonNamesViewModel.cs" />
+    <Compile Include="ViewModel\CommonSurenamesViewModel.cs" />
+    <Compile Include="ViewModel\IDataProvider.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="View\BirthdayTodayView.xaml.cs">

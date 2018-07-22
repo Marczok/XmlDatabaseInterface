@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -14,7 +13,7 @@ using XmlDataProvider = XMLDatabaseInterface.Core.XmlDataProvider;
 
 namespace XMLDatabaseInterface.ViewModel
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class MainWindowViewModel : ViewModelBase, IDataProvider
     {
         private int _databaseSize = 5000;
         private ObservableCollection<Person> _persons;
@@ -23,13 +22,7 @@ namespace XMLDatabaseInterface.ViewModel
         private WindowState _progressWindowState;
         private string _progressMessage;
 
-        private ObservableCollection<NameStatistic> _commonNames =
-            new ObservableCollection<NameStatistic>();
-
-        private ObservableCollection<SurenameStatistics> _commonSurenames =
-            new ObservableCollection<SurenameStatistics>();
-
-        private ObservableCollection<Person> _birthdayCollection;
+        
         private WindowState _addWindowState;
         private string _addName;
         private string _addSurename;
@@ -48,10 +41,7 @@ namespace XMLDatabaseInterface.ViewModel
                 await SaveDataAsync(data).ConfigureAwait(true);
                 data = await LoadDataAsync().ConfigureAwait(true);
                 Persons = new ObservableCollection<Person>(data);
-
-                ProcessCommonNamesCommand.Execute(null);
-                ProcessCommonSurenamesCommand.Execute(null);
-                ProcessBirthdayCommand.Execute(null);
+                
                 ProgressWindowState = WindowState.Closed;
             }, () => MinDatabaseSize < DatabaseSize && DatabaseSize <= MaxDatabaseSize);
 
@@ -64,9 +54,6 @@ namespace XMLDatabaseInterface.ViewModel
                 var data = await LoadDataAsync().ConfigureAwait(true);
                 Persons = new ObservableCollection<Person>(data);
 
-                ProcessCommonNamesCommand.Execute(null);
-                ProcessCommonSurenamesCommand.Execute(null);
-                ProcessBirthdayCommand.Execute(null);
                 ProgressWindowState = WindowState.Closed;
             }, () => File.Exists(DataPath));
 
@@ -75,49 +62,6 @@ namespace XMLDatabaseInterface.ViewModel
                 ProgressWindowState = WindowState.Open;
                 await SaveDataAsync(Persons).ConfigureAwait(true);
                 ProgressWindowState = WindowState.Closed;
-            }, () => Persons != null && Persons?.Count > 0);
-
-            ProcessCommonNamesCommand = new RelayCommand(async () =>
-            {
-                IEnumerable<IGrouping<string, Person>> selected = null;
-                await Task.Run(() =>
-                {
-                    selected = Persons.GroupBy(p => p.Name).OrderByDescending(grp => grp.Count()).Take(10);
-                }).ConfigureAwait(true);
-
-                CommonNames.Clear();
-                foreach (var item in selected)
-                {
-                    CommonNames.Add(new NameStatistic(item.Key, item.Count()));
-                }
-            }, () => Persons != null && Persons?.Count > 0);
-
-            ProcessCommonSurenamesCommand = new RelayCommand(async () =>
-            {
-                IEnumerable<IGrouping<string, Person>> selected = null;
-                await Task.Run(() =>
-                {
-                    selected = Persons.GroupBy(p => p.Surename).OrderByDescending(grp => grp.Count()).Take(10);
-                }).ConfigureAwait(true);
-
-                CommonSurenames.Clear();
-                foreach (var item in selected)
-                {
-                    CommonSurenames.Add(new SurenameStatistics(item.Key, item.Count()));
-                }
-            }, () => Persons != null && Persons?.Count > 0);
-
-            ProcessBirthdayCommand = new RelayCommand(async () =>
-            {
-                var today = DateTime.Now;
-                IEnumerable<Person> birthday = null;
-
-                await Task.Run(() =>
-                {
-                    birthday = Persons.Where(p => p.Birthdate.Day == today.Day && p.Birthdate.Month == today.Month);
-                }).ConfigureAwait(true);
-
-                BirthdayCollection = new ObservableCollection<Person>(birthday);
             }, () => Persons != null && Persons?.Count > 0);
 
             DeletePersonCommand = new RelayCommand<IList>(selected =>
@@ -139,11 +83,13 @@ namespace XMLDatabaseInterface.ViewModel
             }, selected => selected != null && selected.Count > 0 && Persons != null && Persons.Count > 0);
 
             OpenAddWindowCommand = new RelayCommand(() => AddWindowState = WindowState.Open);
+
             AddPersonCommand = new RelayCommand(() =>
             {
                 Persons.Add(new Person(AddName, AddSurename, AddAddress, AddDate));
                 AddWindowState = WindowState.Closed;
             }, () => !string.IsNullOrEmpty(AddName) && !string.IsNullOrEmpty(AddSurename) && !string.IsNullOrEmpty(AddAddress));
+
             ClearAddPersonDataCommand = new RelayCommand(() =>
             {
                 AddName = null;
@@ -160,9 +106,7 @@ namespace XMLDatabaseInterface.ViewModel
         public RelayCommand GenerateDataCommand { get; }
         public RelayCommand LoadDataCommand { get; }
         public RelayCommand SaveDataCommand { get; }
-        public RelayCommand ProcessCommonNamesCommand { get; }
-        public RelayCommand ProcessCommonSurenamesCommand { get; }
-        public RelayCommand ProcessBirthdayCommand { get; }
+        
         public RelayCommand<IList> DeletePersonCommand { get; }
         public RelayCommand OpenAddWindowCommand { get; }
         public RelayCommand AddPersonCommand { get; }
@@ -190,24 +134,6 @@ namespace XMLDatabaseInterface.ViewModel
         {
             get => _persons;
             private set => Set(() => Persons, ref _persons, value);
-        }
-
-        public ObservableCollection<NameStatistic> CommonNames
-        {
-            get => _commonNames;
-            set => Set(() => CommonNames, ref _commonNames, value);
-        }
-
-        public ObservableCollection<SurenameStatistics> CommonSurenames
-        {
-            get => _commonSurenames;
-            set => Set(() => CommonSurenames, ref _commonSurenames, value);
-        }
-
-        public ObservableCollection<Person> BirthdayCollection
-        {
-            get => _birthdayCollection;
-            set => Set(() => BirthdayCollection, ref _birthdayCollection, value);
         }
 
         public WindowState DataSourceWindowState

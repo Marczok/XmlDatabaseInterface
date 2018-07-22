@@ -8,8 +8,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" 
              d:DesignWidth="800" 
-             d:DataContext="{d:DesignInstance viewModel:MainWindowViewModel}"
-             DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
+             d:DataContext="{d:DesignInstance viewModel:CommonSurenamesViewModel}"
+             DataContext="{Binding Source={StaticResource Locator}, Path=CommonSurenames}">
     <Grid>
         <GroupBox Header="{x:Static properties:Resources.MostCommonSurename}">
             <Grid>
