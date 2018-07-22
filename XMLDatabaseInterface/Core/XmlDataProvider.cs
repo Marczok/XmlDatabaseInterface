@@ -50,6 +50,11 @@ namespace XMLDatabaseInterface.Core
 
         public List<Person> GenerateDatabase(int size, IProgress<double> progress = null)
         {
+            if (size < 1)
+            {
+                return null;
+            }
+
             var firstNames = File.ReadAllLines("Resources/DataSources/FirstNames.txt");
             var lastNames = File.ReadAllLines("Resources/DataSources/Surnames.txt");
 
@@ -80,6 +85,11 @@ namespace XMLDatabaseInterface.Core
 
         public bool SaveDatabase(IEnumerable<Person> data, string filename, IProgress<double> progress = null)
         {
+            if (data == null || string.IsNullOrEmpty(filename))
+            {
+                return false;
+            }
+
             var serializer = new XmlSerializer(typeof(List<Person>));
             var enumerable = data.ToList();
             using (var writer = new StreamWriter(filename))
@@ -94,6 +104,11 @@ namespace XMLDatabaseInterface.Core
 
         public bool LoadDatabase(string filename, IProgress<double> progress = null)
         {
+            if (string.IsNullOrEmpty(filename) || !File.Exists(filename))
+            {
+                return false;
+            }
+
             var serializer = new XmlSerializer(typeof(List<Person>));
             using (var stream = new FileStream(filename, FileMode.Open))
             {

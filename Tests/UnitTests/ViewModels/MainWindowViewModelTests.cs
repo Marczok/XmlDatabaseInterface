@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
+﻿using System.IO;
 using System.Threading.Tasks;
+using Moq;
 using XMLDatabaseInterface.Core;
 using XMLDatabaseInterface.ViewModel;
 using Xunit;
@@ -13,10 +10,14 @@ namespace Tests.UnitTests.ViewModels
     public class MainWindowViewModelTests
     {
         private readonly MainWindowViewModel _vm;
+        private Mock<IDataProvider> _mock;
+        private IDataProvider _provider;
 
         public MainWindowViewModelTests()
         {
-            _vm = new MainWindowViewModel();
+            _mock = new Mock<IDataProvider>();
+            _provider = _mock.Object;
+            _vm = new MainWindowViewModel(_provider);
         }
 
         [Fact]
@@ -24,9 +25,6 @@ namespace Tests.UnitTests.ViewModels
         {
             Assert.NotNull(_vm.GenerateDataCommand);
             Assert.NotNull(_vm.LoadDataCommand);
-            Assert.NotNull(_vm.ProcessBirthdayCommand);
-            Assert.NotNull(_vm.ProcessCommonNamesCommand);
-            Assert.NotNull(_vm.ProcessCommonSurenamesCommand);
             Assert.False(File.Exists(_vm.DataPath));
         }
 
@@ -67,8 +65,8 @@ namespace Tests.UnitTests.ViewModels
         public async void LoadDataCommandLoadsDataProperly()
         {
             const int size = 100;
-            var data = XmlDataProvider.GenerateDatabase(size);
-            XmlDataProvider.SaveDatabase(data, _vm.DataPath);
+            var data = _provider.GenerateDatabase(size);
+            _provider.SaveDatabase(data, _vm.DataPath);
             Assert.True(_vm.LoadDataCommand.CanExecute(null));
             _vm.LoadDataCommand.Execute(null);
             await Task.Delay(5000).ConfigureAwait(true); //TODO: Wait for exact time of executing the command
