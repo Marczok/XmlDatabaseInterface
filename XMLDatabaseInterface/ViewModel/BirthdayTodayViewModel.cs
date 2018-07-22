@@ -15,7 +15,7 @@ namespace XMLDatabaseInterface.ViewModel
 
         public BirthdayTodayViewModel(IDataProvider provider)
         {
-            Persons = provider.Persons;
+            Database = provider.Database;
             ProcessBirthdayCommand = new RelayCommand(async () =>
             {
                 var today = DateTime.Now;
@@ -23,14 +23,14 @@ namespace XMLDatabaseInterface.ViewModel
 
                 await Task.Run(() =>
                 {
-                    birthday = Persons.Where(p => p.Birthdate.Day == today.Day && p.Birthdate.Month == today.Month);
+                    birthday = Database.Where(p => p.Birthdate.Day == today.Day && p.Birthdate.Month == today.Month);
                 }).ConfigureAwait(true);
 
                 BirthdayCollection = new ObservableCollection<Person>(birthday);
-            }, () => Persons != null && Persons.Count > 0);
+            }, () => Database != null && Database.Any());
         }
 
-        private IReadOnlyCollection<Person> Persons { get; }
+        private IEnumerable<Person> Database { get; }
         public RelayCommand ProcessBirthdayCommand { get; }
 
         public ObservableCollection<Person> BirthdayCollection

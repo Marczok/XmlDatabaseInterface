@@ -52,7 +52,7 @@ namespace Tests.UnitTests.Core
             XmlDataProvider.WriteDatabase(data, filename);
             Assert.True(File.Exists(filename));
 
-            data = XmlDataProvider.ReadDatabase(filename).ToList();
+            data = XmlDataProvider.LoadDatabase(filename).ToList();
             Assert.Equal(size, data.Count);
             var deserializedItem = data[index];
             Assert.NotEmpty(deserializedItem.Name);

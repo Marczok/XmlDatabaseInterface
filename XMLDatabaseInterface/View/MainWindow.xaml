@@ -21,7 +21,7 @@
     <Grid>
         <Grid.Resources>
             <xcdg:DataGridCollectionViewSource x:Key="MainDataGridSource"
-                                               Source="{Binding Persons}"/>
+                                               Source="{Binding Database}"/>
         </Grid.Resources>
         
         <Grid>

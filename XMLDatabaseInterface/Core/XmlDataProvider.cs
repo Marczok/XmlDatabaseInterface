@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -7,12 +8,13 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using XMLDatabaseInterface.Core.DomainTypes;
+using XMLDatabaseInterface.ViewModel;
 
 namespace XMLDatabaseInterface.Core
 {
-    public static class XmlDataProvider
+    public class XmlDataProvider : IDataProvider
     {
-        private static readonly string[] Adresses =
+        private readonly string[] Adresses =
         {
             "Brno, Ceska",
             "Brno, Olomoucka",
@@ -34,7 +36,15 @@ namespace XMLDatabaseInterface.Core
             "Koln, Kasse Strasse"
         };
 
-        public static IEnumerable<Person> GenerateDatabase(int size, IProgress<double> progress = null)
+        private IEnumerable<Person> _database;
+
+        public IEnumerable<Person> Database
+        {
+            get => _database;
+            private set => _database = value;
+        }
+
+        public List<Person> GenerateDatabase(int size, IProgress<double> progress = null)
         {
             var firstNames = File.ReadAllLines("Resources/DataSources/FirstNames.txt");
             var lastNames = File.ReadAllLines("Resources/DataSources/Surnames.txt");
@@ -64,17 +74,18 @@ namespace XMLDatabaseInterface.Core
             return persons;
         }
 
-        public static void WriteDatabase(IEnumerable<Person> data, string filename, IProgress<double> progress = null)
+        public bool WriteDatabase(IEnumerable<Person> data, string filename, IProgress<double> progress = null)
         {
             var serializer = new XmlSerializer(typeof(List<Person>));
             using (var writer = new StreamWriter(filename))
             {
                 ReportStreamPosition(writer.BaseStream, progress);
                 serializer.Serialize(writer, data.ToList());
+                return true;
             }
         }
 
-        public static IEnumerable<Person> ReadDatabase(string filename, IProgress<double> progress = null)
+        public bool LoadDatabase(string filename, IProgress<double> progress = null)
         {
             var serializer = new XmlSerializer(typeof(List<Person>));
             using (var stream = new FileStream(filename, FileMode.Open))
@@ -83,10 +94,11 @@ namespace XMLDatabaseInterface.Core
                 if (serializer.CanDeserialize(reader))
                 {
                     ReportStreamPosition(stream, progress);
-                    return (List<Person>)serializer.Deserialize(reader);
+                    Database = (List<Person>)serializer.Deserialize(reader);
+                    return true;
                 }
 
-                throw new DirectoryNotFoundException("File cannot be found or deserialized");
+                return false;
             }
         }
 

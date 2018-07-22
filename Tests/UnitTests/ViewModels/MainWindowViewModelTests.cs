@@ -38,8 +38,8 @@ namespace Tests.UnitTests.ViewModels
             _vm.GenerateDataCommand.Execute(null);
             await Task.Delay(5000).ConfigureAwait(true); //TODO: Wait for exact time of executing the command
             Assert.True(File.Exists(_vm.DataPath));
-            Assert.NotNull(_vm.Persons);
-            Assert.Equal(size, _vm.Persons.Count);
+            Assert.NotNull(_vm.Database);
+            Assert.Equal(size, _vm.Database.Count);
             File.Delete(_vm.DataPath);
         }
 
@@ -72,8 +72,8 @@ namespace Tests.UnitTests.ViewModels
             Assert.True(_vm.LoadDataCommand.CanExecute(null));
             _vm.LoadDataCommand.Execute(null);
             await Task.Delay(5000).ConfigureAwait(true); //TODO: Wait for exact time of executing the command
-            Assert.NotNull(_vm.Persons);
-            Assert.Equal(size, _vm.Persons.Count);
+            Assert.NotNull(_vm.Database);
+            Assert.Equal(size, _vm.Database.Count);
             File.Delete(_vm.DataPath);
         }
     }

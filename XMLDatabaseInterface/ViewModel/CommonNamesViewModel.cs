@@ -16,13 +16,13 @@ namespace XMLDatabaseInterface.ViewModel
         
         public CommonNamesViewModel(IDataProvider provider)
         {
-            Persons = provider.Persons;
+            Database = provider.Database;
             ProcessCommonNamesCommand = new RelayCommand(async () =>
             {
                 IEnumerable<IGrouping<string, Person>> selected = null;
                 await Task.Run(() =>
                 {
-                    selected = Persons.GroupBy(p => p.Name).OrderByDescending(grp => grp.Count()).Take(10);
+                    selected = Database.GroupBy(p => p.Name).OrderByDescending(grp => grp.Count()).Take(10);
                 }).ConfigureAwait(true);
 
                 CommonNames.Clear();
@@ -30,10 +30,10 @@ namespace XMLDatabaseInterface.ViewModel
                 {
                     CommonNames.Add(new NameStatistic(item.Key, item.Count()));
                 }
-            }, () => Persons != null && Persons.Count > 0);
+            }, () => Database != null && Database.Any());
         }
 
-        private IReadOnlyCollection<Person> Persons { get; }
+        private IEnumerable<Person> Database { get; }
         public RelayCommand ProcessCommonNamesCommand { get; }
 
         public ObservableCollection<NameStatistic> CommonNames
