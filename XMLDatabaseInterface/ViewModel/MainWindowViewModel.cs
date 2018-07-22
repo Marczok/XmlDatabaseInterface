@@ -117,13 +117,12 @@ namespace XMLDatabaseInterface.ViewModel
 
             DeletePersonCommand = new RelayCommand<IList>(selected =>
             {
-                // Collection need to be copyed, other way will change it, if we delete something, and it will throw exeption
+                // Collection need to be copyed, other way we will change it during iterating, if we delete something, and it will throw exeption
                 var remove = new List<Person>(selected.Count);
                 foreach (var item in selected)
                 {
                     if (item is Person person)
                     {
-
                         remove.Add(person);
                     }
                 }
@@ -132,7 +131,7 @@ namespace XMLDatabaseInterface.ViewModel
                 {
                     Persons.Remove(person);
                 }
-            }, selected => selected != null && selected?.Count > 0 && Persons != null && Persons.Count > 0);
+            }, selected => selected != null && selected.Count > 0 && Persons != null && Persons.Count > 0);
         }
 
         public string DataPath { get; } = "Resources/DataSources/data.xml";
