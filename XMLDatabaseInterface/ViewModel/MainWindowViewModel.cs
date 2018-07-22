@@ -30,6 +30,11 @@ namespace XMLDatabaseInterface.ViewModel
             new ObservableCollection<SurenameStatistics>();
 
         private ObservableCollection<Person> _birthdayCollection;
+        private WindowState _addWindowState;
+        private string _addName;
+        private string _addSurename;
+        private string _addAddress;
+        private DateTime _addDate = DateTime.Now;
 
         public MainWindowViewModel()
         {
@@ -132,6 +137,20 @@ namespace XMLDatabaseInterface.ViewModel
                     Persons.Remove(person);
                 }
             }, selected => selected != null && selected.Count > 0 && Persons != null && Persons.Count > 0);
+
+            OpenAddWindowCommand = new RelayCommand(() => AddWindowState = WindowState.Open);
+            AddPersonCommand = new RelayCommand(() =>
+            {
+                Persons.Add(new Person(AddName, AddSurename, AddAddress, AddDate));
+                AddWindowState = WindowState.Closed;
+            }, () => !string.IsNullOrEmpty(AddName) && !string.IsNullOrEmpty(AddSurename) && !string.IsNullOrEmpty(AddAddress));
+            ClearAddPersonDataCommand = new RelayCommand(() =>
+            {
+                AddName = null;
+                AddSurename = null;
+                AddAddress = null;
+                AddDate = DateTime.Now;
+            });
         }
 
         public string DataPath { get; } = "Resources/DataSources/data.xml";
@@ -145,6 +164,9 @@ namespace XMLDatabaseInterface.ViewModel
         public RelayCommand ProcessCommonSurenamesCommand { get; }
         public RelayCommand ProcessBirthdayCommand { get; }
         public RelayCommand<IList> DeletePersonCommand { get; }
+        public RelayCommand OpenAddWindowCommand { get; }
+        public RelayCommand AddPersonCommand { get; }
+        public RelayCommand ClearAddPersonDataCommand { get; }
 
         public int DatabaseSize
         {
@@ -198,6 +220,36 @@ namespace XMLDatabaseInterface.ViewModel
         {
             get => _progressWindowState;
             set => Set(() => ProgressWindowState, ref _progressWindowState, value);
+        }
+
+        public WindowState AddWindowState
+        {
+            get => _addWindowState;
+            set => Set(() => AddWindowState, ref _addWindowState, value);
+        }
+
+        public string AddName
+        {
+            get => _addName;
+            set => Set(() => AddName, ref _addName, value);
+        }
+
+        public string AddSurename
+        {
+            get => _addSurename;
+            set => Set(() => AddSurename, ref _addSurename, value);
+        }
+
+        public string AddAddress
+        {
+            get => _addAddress;
+            set => Set(() => AddAddress, ref _addAddress, value);
+        }
+
+        public DateTime AddDate
+        {
+            get => _addDate;
+            set => Set(() => AddDate, ref _addDate, value);
         }
 
         private Task<IEnumerable<Person>> GenerateDataAsync()

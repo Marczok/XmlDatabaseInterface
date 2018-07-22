@@ -8,6 +8,7 @@
         xmlns:viewModel="clr-namespace:XMLDatabaseInterface.ViewModel"
         xmlns:properties="clr-namespace:XMLDatabaseInterface.Properties"
         xmlns:view="clr-namespace:XMLDatabaseInterface.View"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         Title="MainWindow" 
         Height="450" 
@@ -31,6 +32,7 @@
                                   Name="GridCollumn"/>
             </Grid.ColumnDefinitions>
 
+            <!--Side statistics view-->
             <StackPanel Orientation="Vertical"
                         HorizontalAlignment="Stretch">
                 <view:CommonNamesView/>
@@ -45,13 +47,16 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+                
+                <!--Icon buttons-->
+                <!--<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> 
+                     from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> 
+                     is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 
+                     title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>-->
                 <StackPanel Orientation="Horizontal"
                             HorizontalAlignment="Right">
-                    <!--<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> 
-                         from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> 
-                         is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 
-                         title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>-->
                     <Button Style="{StaticResource IconButton}"
+                            Command="{Binding OpenAddWindowCommand}"
                             Content="M26,0C11.664,0,0,11.663,0,26s11.664,26,26,26s26-11.663,26-26S40.336,0,26,0z M38.5,28H28v11c0,1.104-0.896,2-2,2
                             s-2-0.896-2-2V28H13.5c-1.104,0-2-0.896-2-2s0.896-2,2-2H24V14c0-1.104,0.896-2,2-2s2,0.896,2,2v10h10.5c1.104,0,2,0.896,2,2
                             S39.604,28,38.5,28z"
@@ -77,6 +82,8 @@
                             Height="15"
                             Margin="2"/>
                 </StackPanel>
+                
+                <!--Main datagrid-->
                 <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource MainDataGridSource}}"
                                       Grid.Row="1"                  
                                       Background="{StaticResource PrimaryBackgroundBrush}"
@@ -91,11 +98,13 @@
         </Grid>
 
 
+        <!--Window container-->
         <xctk:WindowContainer ModalBackgroundBrush="{StaticResource ShadyTransparentBrush}">
+            
+            <!--Data source window-->
             <xctk:ChildWindow WindowState="{Binding DataSourceWindowState}"
                               IsModal="True"
-                              Caption="{x:Static properties:Resources.DataSource}"
-                              CloseButtonVisibility="Collapsed">
+                              Caption="{x:Static properties:Resources.DataSource}">
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
                         <Button Content="{x:Static properties:Resources.GenerateDatabase}"
@@ -112,6 +121,8 @@
                             Command="{Binding LoadDataCommand}"/>
                 </StackPanel>
             </xctk:ChildWindow>
+            
+            <!--Progress window-->
             <xctk:ChildWindow Style="{StaticResource TransparentChildWindow}"
                               WindowState="{Binding ProgressWindowState}"
                               IsModal="True">
@@ -129,6 +140,69 @@
                                FontSize="{StaticResource HighLightFontSize}"
                                Foreground="{StaticResource HighlightBrush}"/>
                 </StackPanel>
+            </xctk:ChildWindow>
+            
+            <!--Add window-->
+            <xctk:ChildWindow WindowState="{Binding AddWindowState}"
+                              IsModal="True"
+                              Caption="{x:Static properties:Resources.AddPersonWindow}">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Column="0"
+                               Grid.Row="0"
+                               Text="{x:Static properties:Resources.Name}"
+                               Margin="2"/>
+                    <TextBlock Grid.Column="0"
+                               Grid.Row="1"
+                               Text="{x:Static properties:Resources.Surename}"
+                               Margin="2"/>
+                    <TextBlock Grid.Column="0"
+                               Grid.Row="2"
+                               Text="{x:Static properties:Resources.Address}"
+                               Margin="2"/>
+                    <TextBlock Grid.Column="0"
+                               Grid.Row="3"
+                               Text="{x:Static properties:Resources.Birthday}"
+                               Margin="2"/>
+                    <TextBox Grid.Column="1"
+                             Grid.Row="0"
+                             Text="{Binding AddName, Mode=TwoWay}"
+                             Margin="2"/>
+                    <TextBox Grid.Column="1"
+                             Grid.Row="1"
+                             Text="{Binding AddSurename, Mode=TwoWay}"
+                             Margin="2"/>
+                    <TextBox Grid.Column="1"
+                             Grid.Row="2"
+                             Text="{Binding AddAddress, Mode=TwoWay}"
+                             Margin="2"/>
+                    <xctk:DateTimePicker Grid.Column="1"
+                                         Grid.Row="3"
+                                         Value="{Binding AddDate, Mode=TwoWay}"
+                                         Margin="2"
+                                         Background="{StaticResource PrimaryBackgroundBrush}"/>
+                    <Button Content="{x:Static properties:Resources.AddPerson}"
+                            Command="{Binding AddPersonCommand}"
+                            Grid.Column="0"
+                            Grid.Row="4"
+                            Grid.ColumnSpan="2"
+                            Margin="2"/>
+                </Grid>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Closed">
+                        <i:InvokeCommandAction Command="{Binding ClearAddPersonDataCommand}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
             </xctk:ChildWindow>
         </xctk:WindowContainer>
     </Grid>

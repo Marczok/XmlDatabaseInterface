@@ -57,13 +57,7 @@ namespace XMLDatabaseInterface.Core
 
                 var address = Adresses[rnd.Next(Adresses.Length - 1)] + " " + rnd.Next(128);
 
-                persons.Add(new Person
-                {
-                    Name = name,
-                    Surename = surename,
-                    Address = address,
-                    Birthdate = dateTime
-                });
+                persons.Add(new Person(name, surename, address, dateTime));
                 progress?.Report((double)i / size);
             }
 

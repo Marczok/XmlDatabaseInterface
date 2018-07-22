@@ -150,4 +150,16 @@
   <data name="Surename" xml:space="preserve">
     <value>Surename</value>
   </data>
+  <data name="AddPerson" xml:space="preserve">
+    <value>Add Person</value>
+  </data>
+  <data name="Birthday" xml:space="preserve">
+    <value>Birthday</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="AddPersonWindow" xml:space="preserve">
+    <value>Add Person Window</value>
+  </data>
 </root>

@@ -61,6 +61,42 @@ namespace XMLDatabaseInterface.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Person.
+        /// </summary>
+        public static string AddPerson {
+            get {
+                return ResourceManager.GetString("AddPerson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Person Window.
+        /// </summary>
+        public static string AddPersonWindow {
+            get {
+                return ResourceManager.GetString("AddPersonWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        public static string Address {
+            get {
+                return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Birthday.
+        /// </summary>
+        public static string Birthday {
+            get {
+                return ResourceManager.GetString("Birthday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Count.
         /// </summary>
         public static string Count {

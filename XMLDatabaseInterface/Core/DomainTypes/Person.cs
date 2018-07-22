@@ -5,6 +5,16 @@ namespace XMLDatabaseInterface.Core.DomainTypes
 {
     public class Person
     {
+        public Person(){}
+
+        public Person(string name, string surename, string address, DateTime birthdate)
+        {
+            Name = name;
+            Surename = surename;
+            Address = address;
+            Birthdate = birthdate;
+        }
+
         [XmlAttribute] public string Name { get; set; }
 
         [XmlAttribute] public string Surename { get; set; }
