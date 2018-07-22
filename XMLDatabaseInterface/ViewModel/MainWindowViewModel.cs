@@ -41,7 +41,6 @@ namespace XMLDatabaseInterface.ViewModel
 
                 var data = await GenerateDataAsync().ConfigureAwait(true);
                 await SaveDataAsync(data).ConfigureAwait(true);
-                await LoadDataAsync().ConfigureAwait(true);
                 Database = new ObservableCollection<Person>(_provider.Database);
 
                 ProgressWindowState = WindowState.Closed;
@@ -197,7 +196,7 @@ namespace XMLDatabaseInterface.ViewModel
             ProgressMessage = Resources.SavingData;
             return Task.Run(() =>
             {
-                return _provider.WriteDatabase(
+                return _provider.SaveDatabase(
                     data,
                     DataPath,
                     new Progress<double>(progress => Progress = progress)

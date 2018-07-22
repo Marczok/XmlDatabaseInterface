@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
@@ -12,9 +12,9 @@ using XMLDatabaseInterface.ViewModel;
 
 namespace XMLDatabaseInterface.Core
 {
-    public class XmlDataProvider : IDataProvider
+    public class XmlDataProvider :  IDataProvider, INotifyPropertyChanged
     {
-        private readonly string[] Adresses =
+        private readonly string[] _adresses =
         {
             "Brno, Ceska",
             "Brno, Olomoucka",
@@ -41,7 +41,11 @@ namespace XMLDatabaseInterface.Core
         public IEnumerable<Person> Database
         {
             get => _database;
-            private set => _database = value;
+            private set
+            {
+                _database = value;
+                OnPropertyChanged(nameof(Database));
+            }
         }
 
         public List<Person> GenerateDatabase(int size, IProgress<double> progress = null)
@@ -65,7 +69,7 @@ namespace XMLDatabaseInterface.Core
                     surename = lastNames[rnd.Next(lastNames.Length - 1)];
                 }
 
-                var address = Adresses[rnd.Next(Adresses.Length - 1)] + " " + rnd.Next(128);
+                var address = _adresses[rnd.Next(_adresses.Length - 1)] + " " + rnd.Next(128);
 
                 persons.Add(new Person(name, surename, address, dateTime));
                 progress?.Report((double)i / size);
@@ -74,15 +78,18 @@ namespace XMLDatabaseInterface.Core
             return persons;
         }
 
-        public bool WriteDatabase(IEnumerable<Person> data, string filename, IProgress<double> progress = null)
+        public bool SaveDatabase(IEnumerable<Person> data, string filename, IProgress<double> progress = null)
         {
             var serializer = new XmlSerializer(typeof(List<Person>));
+            var enumerable = data.ToList();
             using (var writer = new StreamWriter(filename))
             {
                 ReportStreamPosition(writer.BaseStream, progress);
-                serializer.Serialize(writer, data.ToList());
-                return true;
+                serializer.Serialize(writer, enumerable);
             }
+
+            Database = enumerable;
+            return true;
         }
 
         public bool LoadDatabase(string filename, IProgress<double> progress = null)
@@ -118,6 +125,13 @@ namespace XMLDatabaseInterface.Core
                     progress.Report(1);
                 });
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

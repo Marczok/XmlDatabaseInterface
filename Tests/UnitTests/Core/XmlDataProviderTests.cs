@@ -31,7 +31,7 @@ namespace Tests.UnitTests.Core
             const int size = 100000;
             const string filename = "data.xml";
             var data = XmlDataProvider.GenerateDatabase(size);
-            XmlDataProvider.WriteDatabase(data, filename);
+            XmlDataProvider.SaveDatabase(data, filename);
             Assert.True(File.Exists(filename));
             File.Delete(filename);
         }
@@ -49,7 +49,7 @@ namespace Tests.UnitTests.Core
             const int size = 500;
             var data = XmlDataProvider.GenerateDatabase(size).ToList();
             var generatedItem = data[index];
-            XmlDataProvider.WriteDatabase(data, filename);
+            XmlDataProvider.SaveDatabase(data, filename);
             Assert.True(File.Exists(filename));
 
             data = XmlDataProvider.LoadDatabase(filename).ToList();

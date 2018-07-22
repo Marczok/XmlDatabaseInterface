@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
 using XMLDatabaseInterface.Core.DomainTypes;
 
 namespace XMLDatabaseInterface.ViewModel
@@ -15,23 +14,24 @@ namespace XMLDatabaseInterface.ViewModel
 
         public BirthdayTodayViewModel(IDataProvider provider)
         {
-            Database = provider.Database;
-            ProcessBirthdayCommand = new RelayCommand(async () =>
+            provider.PropertyChanged += async (sender, args) =>
             {
-                var today = DateTime.Now;
-                IEnumerable<Person> birthday = null;
-
-                await Task.Run(() =>
+                switch (args.PropertyName)
                 {
-                    birthday = Database.Where(p => p.Birthdate.Day == today.Day && p.Birthdate.Month == today.Month);
-                }).ConfigureAwait(true);
+                    case var name when nameof(provider.Database) == name:
+                        var today = DateTime.Now;
+                        IEnumerable<Person> birthday = null;
 
-                BirthdayCollection = new ObservableCollection<Person>(birthday);
-            }, () => Database != null && Database.Any());
+                        await Task.Run(() =>
+                        {
+                            birthday = provider.Database.Where(p => p.Birthdate.Day == today.Day && p.Birthdate.Month == today.Month);
+                        }).ConfigureAwait(true);
+
+                        BirthdayCollection = new ObservableCollection<Person>(birthday);
+                        break;
+                }
+            };
         }
-
-        private IEnumerable<Person> Database { get; }
-        public RelayCommand ProcessBirthdayCommand { get; }
 
         public ObservableCollection<Person> BirthdayCollection
         {

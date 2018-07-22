@@ -3,38 +3,34 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
-using GalaSoft.MvvmLight.CommandWpf;
 using XMLDatabaseInterface.Core.DomainTypes;
 
 namespace XMLDatabaseInterface.ViewModel
 {
     public class CommonNamesViewModel : ViewModelBase
     {
-        private ObservableCollection<NameStatistic> _commonNames =
-            new ObservableCollection<NameStatistic>();
+        private ObservableCollection<NameStatistic> _commonNames;
 
-        
         public CommonNamesViewModel(IDataProvider provider)
         {
-            Database = provider.Database;
-            ProcessCommonNamesCommand = new RelayCommand(async () =>
+            provider.PropertyChanged += async (sender, args) => 
             {
-                IEnumerable<IGrouping<string, Person>> selected = null;
-                await Task.Run(() =>
+                switch (args.PropertyName)
                 {
-                    selected = Database.GroupBy(p => p.Name).OrderByDescending(grp => grp.Count()).Take(10);
-                }).ConfigureAwait(true);
+                    case var name when nameof(provider.Database) == name:
+                        var statistics = new List<NameStatistic>();
+                        await Task.Run(() =>
+                        {
+                            var selected = provider.Database.GroupBy(p => p.Name)
+                                .OrderByDescending(grp => grp.Count()).Take(10);
+                            statistics.AddRange(selected.Select(item => new NameStatistic(item.Key, item.Count())));
+                        }).ConfigureAwait(true);
 
-                CommonNames.Clear();
-                foreach (var item in selected)
-                {
-                    CommonNames.Add(new NameStatistic(item.Key, item.Count()));
+                        CommonNames = new ObservableCollection<NameStatistic>(statistics);
+                        break;
                 }
-            }, () => Database != null && Database.Any());
+            };
         }
-
-        private IEnumerable<Person> Database { get; }
-        public RelayCommand ProcessCommonNamesCommand { get; }
 
         public ObservableCollection<NameStatistic> CommonNames
         {

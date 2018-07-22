@@ -68,7 +68,7 @@ namespace Tests.UnitTests.ViewModels
         {
             const int size = 100;
             var data = XmlDataProvider.GenerateDatabase(size);
-            XmlDataProvider.WriteDatabase(data, _vm.DataPath);
+            XmlDataProvider.SaveDatabase(data, _vm.DataPath);
             Assert.True(_vm.LoadDataCommand.CanExecute(null));
             _vm.LoadDataCommand.Execute(null);
             await Task.Delay(5000).ConfigureAwait(true); //TODO: Wait for exact time of executing the command
