@@ -138,7 +138,7 @@
                     <TextBlock Text="{Binding ProgressMessage}"
                                TextAlignment="Center"
                                TextWrapping="Wrap"
-                               FontSize="{StaticResource HighLightFontSize}"
+                               FontSize="{StaticResource BigFontSize}"
                                Foreground="{StaticResource HighlightBrush}"/>
                 </StackPanel>
             </xctk:ChildWindow>
