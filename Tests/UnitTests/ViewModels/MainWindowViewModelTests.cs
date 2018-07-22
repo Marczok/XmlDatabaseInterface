@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Moq;
 using Xceed.Wpf.Toolkit;
 using XMLDatabaseInterface.Core;
 using XMLDatabaseInterface.Core.DomainTypes;
@@ -38,7 +36,7 @@ namespace Tests.UnitTests.ViewModels
             Assert.Null(_vm.AddAddress);
             Assert.Equal(DateTime.Today, _vm.AddDate.Date);
             Assert.False(File.Exists(_vm.DataPath));
-            Assert.Null(_vm.Database);
+            Assert.Empty(_vm.Database);
             Assert.Equal(WindowState.Closed, _vm.AddWindowState);
             Assert.Equal(WindowState.Closed, _vm.ProgressWindowState);
             Assert.Equal(WindowState.Open, _vm.DataSourceWindowState);
@@ -113,6 +111,13 @@ namespace Tests.UnitTests.ViewModels
         }
 
         [Fact]
+        public void SaveDataCommandCannotBeExecutedWithoutData()
+        {
+            Assert.Empty(_vm.Database);
+            Assert.False(_vm.SaveDataCommand.CanExecute(null));
+        }
+
+        [Fact]
         public async void DeleteCommandDeleteSelectedPerson()
         {
             const int size = 10;
@@ -133,5 +138,104 @@ namespace Tests.UnitTests.ViewModels
             Assert.DoesNotContain(deleted[1], _vm.Database);
             File.Delete(_vm.DataPath);
         }
+
+        [Fact]
+        public async void DeleteCommandCannotExecuteWithoutAnythingSelected()
+        {
+            const int size = 10;
+            var data = _provider.GenerateDatabase(size);
+            _provider.SaveDatabase(data, _vm.DataPath);
+            _vm.LoadDataCommand.Execute(null);
+            await Task.Delay(1000).ConfigureAwait(true); //TODO: Wait for exact time of executing the command
+            Assert.Equal(data[0], _vm.Database[0]);
+            Assert.False(_vm.DeletePersonCommand.CanExecute(null));
+            Assert.False(_vm.DeletePersonCommand.CanExecute(new List<Person>()));
+            Assert.False(_vm.DeletePersonCommand.CanExecute(new object()));
+            File.Delete(_vm.DataPath);
+        }
+
+        [Fact]
+        public void DeleteCommandCannotExecuteWithoutDatabase()
+        {
+            Assert.Empty(_vm.Database);
+            Assert.False(_vm.DeletePersonCommand.CanExecute(new List<Person> { new Person() }));
+        }
+
+        [Fact]
+        public async void DeleteCommandCannotExecuteWithEmptyDatabase()
+        {
+            const int size = 1;
+            var data = _provider.GenerateDatabase(size);
+            _provider.SaveDatabase(data, _vm.DataPath);
+            _vm.LoadDataCommand.Execute(null);
+            await Task.Delay(1000).ConfigureAwait(true); //TODO: Wait for exact time of executing the command
+            Assert.Equal(data[0], _vm.Database[0]);
+            var deleted = new List<Person>
+            {
+                data[0]
+            };
+
+            Assert.True(_vm.DeletePersonCommand.CanExecute(deleted));
+            _vm.DeletePersonCommand.Execute(deleted);
+
+            Assert.Empty(_vm.Database);
+            Assert.False(_vm.DeletePersonCommand.CanExecute(deleted));
+            File.Delete(_vm.DataPath);
+        }
+
+        [Fact]
+        public void OpenAddWindowCommandOpensAddWindow()
+        {
+            Assert.True(_vm.OpenAddWindowCommand.CanExecute(null));
+            _vm.OpenAddWindowCommand.Execute(null);
+            Assert.Equal(WindowState.Open, _vm.AddWindowState);
+        }
+
+        [Fact]
+        public void AddPersonCommandAddsPersonToCachedDatabase()
+        {
+            string name = "adam", surename = "smith", address = "street 2";
+            var date = DateTime.Today;
+            _vm.AddName = name;
+            _vm.AddSurename = surename;
+            _vm.AddAddress = address;
+            _vm.AddDate = date;
+            Assert.Empty(_vm.Database);
+            Assert.True(_vm.AddPersonCommand.CanExecute(null));
+            _vm.AddPersonCommand.Execute(null);
+            Assert.NotEmpty(_vm.Database);
+            var item = _vm.Database[0];
+            Assert.Equal(name, item.Name);
+            Assert.Equal(surename, item.Surename);
+            Assert.Equal(address, item.Address);
+            Assert.Equal(date, item.Birthdate);
+        }
+
+        [Fact]
+        public void AddPersonCommandCannotExecuteWithoutSetParameters()
+        {
+            Assert.False(_vm.AddPersonCommand.CanExecute(null));
+            _vm.AddAddress = "x";
+            Assert.False(_vm.AddPersonCommand.CanExecute(null));
+            _vm.AddName = "x";
+            Assert.False(_vm.AddPersonCommand.CanExecute(null));
+            _vm.AddSurename = "x";
+            Assert.True(_vm.AddPersonCommand.CanExecute(null));
+        }
+
+        [Fact]
+        public void ClearAddPersonDataCommandClearParameters()
+        {
+            _vm.AddAddress = "x";
+            _vm.AddName = "X";
+            _vm.AddSurename = "j";
+            _vm.AddDate = DateTime.MaxValue;
+            _vm.ClearAddPersonDataCommand.Execute(null);
+            Assert.True(string.IsNullOrEmpty(_vm.AddAddress));
+            Assert.True(string.IsNullOrEmpty(_vm.AddName));
+            Assert.True(string.IsNullOrEmpty(_vm.AddSurename));
+            Assert.Equal(DateTime.Today.Date, _vm.AddDate.Date);
+        }
     }
+
 }

@@ -15,7 +15,7 @@ namespace XMLDatabaseInterface.ViewModel
     public class MainWindowViewModel : ViewModelBase
     {
         private int _databaseSize = 5000;
-        private ObservableCollection<Person> _database;
+        private ObservableCollection<Person> _database = new ObservableCollection<Person>();
         private WindowState _dataSourceWindowState = WindowState.Open;
         private double _progress;
         private WindowState _progressWindowState;
