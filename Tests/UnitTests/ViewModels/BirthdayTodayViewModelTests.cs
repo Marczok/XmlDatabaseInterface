@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using XMLDatabaseInterface.Core;
 using XMLDatabaseInterface.Core.DomainTypes;
@@ -43,6 +44,8 @@ namespace Tests.UnitTests.ViewModels
             Assert.Equal("x", _vm.BirthdayCollection[0].Surename);
             Assert.Equal("y", _vm.BirthdayCollection[1].Name);
             Assert.Equal("y", _vm.BirthdayCollection[1].Surename);
+
+            File.Delete(path);
         }
     }
 }
