@@ -110,7 +110,7 @@ namespace XMLDatabaseInterface.ViewModel
             {
                 args.Cancel = true;
                 ClosingDialogState = WindowState.Open;
-            });
+            }, args => DataSourceWindowState == WindowState.Closed);
 
             SaveAndCloseCommand = new RelayCommand(async () =>
             {
