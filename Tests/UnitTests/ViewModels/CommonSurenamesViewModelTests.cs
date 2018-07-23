@@ -28,7 +28,7 @@ namespace Tests.UnitTests.ViewModels
         [Fact]
         public async void CommmonSurenamesDisplayedProperly()
         {
-            const string path = "test.xml";
+            const string path = "test1.xml";
             var testCollection = new List<Person>
             {
                 new Person("x", "x", "x", DateTime.Today),
@@ -60,7 +60,7 @@ namespace Tests.UnitTests.ViewModels
         [Fact]
         public async void JustTenSurenamesIsDisplayed()
         {
-            const string path = "test.xml";
+            const string path = "test2.xml";
             var testCollection = new List<Person>
             {
                 new Person("1", "1", "x", DateTime.Today),

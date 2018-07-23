@@ -28,7 +28,7 @@ namespace Tests.UnitTests.ViewModels
         [Fact]
         public async void CommmonNamesDisplayedProperly()
         {
-            const string path = "test.xml";
+            const string path = "test3.xml";
             var testCollection = new List<Person>
             {
                 new Person("x", "x", "x", DateTime.Today),
@@ -60,7 +60,7 @@ namespace Tests.UnitTests.ViewModels
         [Fact]
         public async void JustTenNamesIsDisplayed()
         {
-            const string path = "test.xml";
+            const string path = "test4.xml";
             var testCollection = new List<Person>
             {
                 new Person("1", "x", "x", DateTime.Today),

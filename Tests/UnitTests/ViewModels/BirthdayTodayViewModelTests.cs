@@ -28,7 +28,7 @@ namespace Tests.UnitTests.ViewModels
         [Fact]
         public async void BirthdayDisplayedProperly()
         {
-            const string path = "test.xml";
+            const string path = "test5.xml";
             var testCollection = new List<Person>
             {
                 new Person("x", "x", "x", DateTime.Today),

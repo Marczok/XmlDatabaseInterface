@@ -106,7 +106,7 @@ namespace Tests.UnitTests.Core
         {
             PropertyChangedEventArgs testArgs = null;
             var counter = 0;
-            const string filename = "test.xml";
+            const string filename = "test6.xml";
 
             _provider.PropertyChanged += (sender, args) =>
             {
@@ -154,7 +154,7 @@ namespace Tests.UnitTests.Core
         {
             PropertyChangedEventArgs testArgs = null;
             var counter = 0;
-            const string filename = "test.xml";
+            const string filename = "test7.xml";
             _provider.SaveDatabase(new List<Person>(), filename);
 
             _provider.PropertyChanged += (sender, args) =>
