@@ -106,6 +106,15 @@ namespace XMLDatabaseInterface.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Count.
         /// </summary>
         public static string Count {
@@ -223,11 +232,29 @@ namespace XMLDatabaseInterface.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save Changes.
         /// </summary>
         public static string SaveChanged {
             get {
                 return ResourceManager.GetString("SaveChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Would you like to save changes? Unsaved data will be lost..
+        /// </summary>
+        public static string SaveChangesAnswer {
+            get {
+                return ResourceManager.GetString("SaveChangesAnswer", resourceCulture);
             }
         }
         

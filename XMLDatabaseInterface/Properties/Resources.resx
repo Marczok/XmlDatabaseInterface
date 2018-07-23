@@ -186,4 +186,13 @@
   <data name="SaveChangesShortcut" xml:space="preserve">
     <value>'Ctrl' + 'S'</value>
   </data>
+  <data name="SaveChangesAnswer" xml:space="preserve">
+    <value>Would you like to save changes? Unsaved data will be lost.</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
 </root>

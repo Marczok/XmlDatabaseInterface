@@ -2,13 +2,15 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Threading.Tasks;
+using System.Windows;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using Xceed.Wpf.Toolkit;
 using XMLDatabaseInterface.Core.DomainTypes;
 using XMLDatabaseInterface.Properties;
+using WindowState = Xceed.Wpf.Toolkit.WindowState;
 
 namespace XMLDatabaseInterface.ViewModel
 {
@@ -20,14 +22,13 @@ namespace XMLDatabaseInterface.ViewModel
         private double _progress;
         private WindowState _progressWindowState;
         private string _progressMessage;
-
-
         private WindowState _addWindowState;
         private string _addName;
         private string _addSurename;
         private string _addAddress;
         private DateTime _addDate = DateTime.Now;
         private readonly IDataProvider _provider;
+        private WindowState _closingDialogState;
 
         public MainWindowViewModel(IDataProvider provider)
         {
@@ -104,6 +105,21 @@ namespace XMLDatabaseInterface.ViewModel
                 AddAddress = null;
                 AddDate = DateTime.Now;
             });
+
+            WindowClosingCommand = new RelayCommand<CancelEventArgs>(args =>
+            {
+                args.Cancel = true;
+                ClosingDialogState = WindowState.Open;
+            });
+
+            SaveAndCloseCommand = new RelayCommand(async () =>
+            {
+                SaveDataCommand.Execute(null);
+                await Task.Delay(3000).ConfigureAwait(true);
+                Application.Current.Shutdown(0);
+            });
+
+            CloseCommand = new RelayCommand(() => Application.Current.Shutdown(0));
         }
 
         public string DataPath { get; } = "Resources/DataSources/data.xml";
@@ -119,6 +135,10 @@ namespace XMLDatabaseInterface.ViewModel
         public RelayCommand OpenAddWindowCommand { get; }
         public RelayCommand AddPersonCommand { get; }
         public RelayCommand ClearAddPersonDataCommand { get; }
+
+        public RelayCommand<CancelEventArgs> WindowClosingCommand { get; }
+        public RelayCommand SaveAndCloseCommand { get; }
+        public RelayCommand CloseCommand { get; }
 
         public int DatabaseSize
         {
@@ -160,6 +180,12 @@ namespace XMLDatabaseInterface.ViewModel
         {
             get => _addWindowState;
             set => Set(() => AddWindowState, ref _addWindowState, value);
+        }
+
+        public WindowState ClosingDialogState
+        {
+            get => _closingDialogState;
+            set => Set(() => ClosingDialogState, ref _closingDialogState, value);
         }
 
         public string AddName
