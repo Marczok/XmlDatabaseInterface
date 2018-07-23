@@ -70,6 +70,15 @@ namespace XMLDatabaseInterface.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;Ctrl&apos; + &apos;+&apos;.
+        /// </summary>
+        public static string AddPersonShortcut {
+            get {
+                return ResourceManager.GetString("AddPersonShortcut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Person Window.
         /// </summary>
         public static string AddPersonWindow {
@@ -111,6 +120,42 @@ namespace XMLDatabaseInterface.Properties {
         public static string DataSource {
             get {
                 return ResourceManager.GetString("DataSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Changes.
+        /// </summary>
+        public static string DeleteChanges {
+            get {
+                return ResourceManager.GetString("DeleteChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;Ctrl&apos; + &apos;D&apos;.
+        /// </summary>
+        public static string DeleteChangesShortcut {
+            get {
+                return ResourceManager.GetString("DeleteChangesShortcut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete Selected Persons.
+        /// </summary>
+        public static string DeletePerson {
+            get {
+                return ResourceManager.GetString("DeletePerson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;Ctrl&apos; + &apos;-&apos;.
+        /// </summary>
+        public static string DeletePersonShortcut {
+            get {
+                return ResourceManager.GetString("DeletePersonShortcut", resourceCulture);
             }
         }
         
@@ -174,6 +219,24 @@ namespace XMLDatabaseInterface.Properties {
         public static string ProcessingData {
             get {
                 return ResourceManager.GetString("ProcessingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Changes.
+        /// </summary>
+        public static string SaveChanged {
+            get {
+                return ResourceManager.GetString("SaveChanged", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;Ctrl&apos; + &apos;S&apos;.
+        /// </summary>
+        public static string SaveChangesShortcut {
+            get {
+                return ResourceManager.GetString("SaveChangesShortcut", resourceCulture);
             }
         }
         

@@ -165,4 +165,25 @@
   <data name="Statistics" xml:space="preserve">
     <value>Statistics</value>
   </data>
+  <data name="DeletePerson" xml:space="preserve">
+    <value>Delete Selected Persons</value>
+  </data>
+  <data name="DeleteChanges" xml:space="preserve">
+    <value>Delete Changes</value>
+  </data>
+  <data name="SaveChanged" xml:space="preserve">
+    <value>Save Changes</value>
+  </data>
+  <data name="AddPersonShortcut" xml:space="preserve">
+    <value>'Ctrl' + '+'</value>
+  </data>
+  <data name="DeletePersonShortcut" xml:space="preserve">
+    <value>'Ctrl' + '-'</value>
+  </data>
+  <data name="DeleteChangesShortcut" xml:space="preserve">
+    <value>'Ctrl' + 'D'</value>
+  </data>
+  <data name="SaveChangesShortcut" xml:space="preserve">
+    <value>'Ctrl' + 'S'</value>
+  </data>
 </root>
