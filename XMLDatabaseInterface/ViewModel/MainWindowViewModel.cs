@@ -65,6 +65,10 @@ namespace XMLDatabaseInterface.ViewModel
                 ProgressWindowState = WindowState.Closed;
             }, () => Database != null && Database?.Count > 0);
 
+            ResetDataCommand = new RelayCommand(
+                () => Database = new ObservableCollection<Person>(_provider.Database),
+                () => Database != null && Database?.Count > 0);
+
             DeletePersonCommand = new RelayCommand<IList>(selected =>
             {
                 // Collection need to be copyed, other way we will change it during iterating, if we delete something, and it will throw exeption
@@ -86,10 +90,12 @@ namespace XMLDatabaseInterface.ViewModel
             OpenAddWindowCommand = new RelayCommand(() => AddWindowState = WindowState.Open);
 
             AddPersonCommand = new RelayCommand(() =>
-            {
-                Database.Add(new Person(AddName, AddSurename, AddAddress, AddDate));
-                AddWindowState = WindowState.Closed;
-            }, () => !string.IsNullOrEmpty(AddName) && !string.IsNullOrEmpty(AddSurename) && !string.IsNullOrEmpty(AddAddress));
+                {
+                    Database.Add(new Person(AddName, AddSurename, AddAddress, AddDate));
+                    AddWindowState = WindowState.Closed;
+                },
+                () => !string.IsNullOrEmpty(AddName) && !string.IsNullOrEmpty(AddSurename) &&
+                      !string.IsNullOrEmpty(AddAddress));
 
             ClearAddPersonDataCommand = new RelayCommand(() =>
             {
@@ -107,6 +113,7 @@ namespace XMLDatabaseInterface.ViewModel
         public RelayCommand GenerateDataCommand { get; }
         public RelayCommand LoadDataCommand { get; }
         public RelayCommand SaveDataCommand { get; }
+        public RelayCommand ResetDataCommand { get; }
 
         public RelayCommand<IList> DeletePersonCommand { get; }
         public RelayCommand OpenAddWindowCommand { get; }
@@ -210,9 +217,9 @@ namespace XMLDatabaseInterface.ViewModel
             return Task.Run(() =>
             {
                 return _provider.LoadDatabase(
-                        DataPath,
-                        new Progress<double>(progress => Progress = progress)
-                    );
+                    DataPath,
+                    new Progress<double>(progress => Progress = progress)
+                );
             });
         }
     }

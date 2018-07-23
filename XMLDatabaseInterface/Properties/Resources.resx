@@ -162,4 +162,7 @@
   <data name="AddPersonWindow" xml:space="preserve">
     <value>Add Person Window</value>
   </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
 </root>

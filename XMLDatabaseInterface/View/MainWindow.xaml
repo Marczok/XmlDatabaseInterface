@@ -24,82 +24,94 @@
                                                Source="{Binding Database}"/>
         </Grid.Resources>
 
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"
-                                  MinWidth="200"/>
-                <ColumnDefinition Width="4*"
-                                  Name="GridCollumn"
-                                  MinWidth="500"/>
-            </Grid.ColumnDefinitions>
+        <TabControl>
 
-            <!--Side statistics view-->
-            <StackPanel Orientation="Vertical"
-                        HorizontalAlignment="Stretch">
-                <view:CommonNamesView/>
-                <view:CommonSurenamesView/>
-                <view:BirthdayTodayView/>
-            </StackPanel>
+            <!--Data view-->
+            <TabItem Header="{x:Static properties:Resources.DataSource}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
 
+                    <!--Icon buttons-->
+                    <!--<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> 
+                         from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> 
+                         is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 
+                         title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>-->
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Right">
+                        <Button Style="{StaticResource IconButton}"
+                                Command="{Binding OpenAddWindowCommand}"
+                                Content="M26,0C11.664,0,0,11.663,0,26s11.664,26,26,26s26-11.663,26-26S40.336,0,26,0z M38.5,28H28v11c0,1.104-0.896,2-2,2
+                                s-2-0.896-2-2V28H13.5c-1.104,0-2-0.896-2-2s0.896-2,2-2H24V14c0-1.104,0.896-2,2-2s2,0.896,2,2v10h10.5c1.104,0,2,0.896,2,2
+                                S39.604,28,38.5,28z"
+                                Width="{StaticResource GridIconsSize}"
+                                Height="{StaticResource GridIconsSize}"
+                                Margin="2"/>
+                        <Button Style="{StaticResource IconButton}"
+                                Command="{Binding DeletePersonCommand}"
+                                CommandParameter="{Binding ElementName=MainDataGrid, Path=SelectedItems}"
+                                Content="M26,0C11.664,0,0,11.663,0,26s11.664,26,26,26s26-11.663,26-26S40.336,0,26,0z M38.5,28h-25c-1.104,0-2-0.896-2-2
+                                s0.896-2,2-2h25c1.104,0,2,0.896,2,2S39.604,28,38.5,28z"
+                                Width="{StaticResource GridIconsSize}"
+                                Height="{StaticResource GridIconsSize}"
+                                Margin="2"/>
+                        <Button Style="{StaticResource IconButton}"
+                                Command="{Binding ResetDataCommand}"
+                                Content="M52.5,6H38.456c-0.11-1.25-0.495-3.358-1.813-4.711C35.809,0.434,34.751,0,33.499,0H23.5c-1.252,0-2.31,0.434-3.144,1.289
+                                C19.038,2.642,18.653,4.75,18.543,6H6.5c-0.552,0-1,0.447-1,1s0.448,1,1,1h2.041l1.915,46.021C10.493,55.743,11.565,59,15.364,59
+                                h28.272c3.799,0,4.871-3.257,4.907-4.958L50.459,8H52.5c0.552,0,1-0.447,1-1S53.052,6,52.5,6z M20.5,50c0,0.553-0.448,1-1,1
+                                s-1-0.447-1-1V17c0-0.553,0.448-1,1-1s1,0.447,1,1V50z M30.5,50c0,0.553-0.448,1-1,1s-1-0.447-1-1V17c0-0.553,0.448-1,1-1
+                                s1,0.447,1,1V50z M40.5,50c0,0.553-0.448,1-1,1s-1-0.447-1-1V17c0-0.553,0.448-1,1-1s1,0.447,1,1V50z M21.792,2.681
+                                C22.24,2.223,22.799,2,23.5,2h9.999c0.701,0,1.26,0.223,1.708,0.681c0.805,0.823,1.128,2.271,1.24,3.319H20.553
+                                C20.665,4.952,20.988,3.504,21.792,2.681z"
+                                Width="{StaticResource GridIconsSize}"
+                                Height="{StaticResource GridIconsSize}"
+                                Margin="2"/>
+                        <Button Style="{StaticResource IconButton}"
+                                Command="{Binding SaveDataCommand}"
+                                Content="M39.914,0H0.5v49h48V8.586L39.914,0z M10.5,2h26v16h-26V2z M39.5,47h-31V26h31V47z
+                                M13.5,32h7c0.553,0,1-0.447,1-1s-0.447-1-1-1h-7c-0.553,0-1,0.447-1,1S12.947,32,13.5,32z
+                                M13.5,36h10c0.553,0,1-0.447,1-1s-0.447-1-1-1h-10c-0.553,0-1,0.447-1,1S12.947,36,13.5,36z
+                                M26.5,36c0.27,0,0.52-0.11,0.71-0.29c0.18-0.19,0.29-0.45,0.29-0.71s-0.11-0.521-0.29-0.71c-0.37-0.37-1.04-0.37-1.41,0
+                                c-0.19,0.189-0.3,0.439-0.3,0.71c0,0.27,0.109,0.52,0.29,0.71C25.979,35.89,26.229,36,26.5,36z"
+                                Width="{StaticResource GridIconsSize}"
+                                Height="{StaticResource GridIconsSize}"
+                                Margin="2"/>
+                    </StackPanel>
 
+                    <!--Main datagrid-->
+                    <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource MainDataGridSource}}"
+                                          Grid.Row="1"                  
+                                          HorizontalAlignment="Stretch"
+                                          HorizontalContentAlignment="Stretch"
+                                          Margin="2"
+                                          SelectionMode="Multiple"
+                                          x:Name="MainDataGrid">
+                        <xcdg:DataGridControl.View>
+                            <xcdg:TableView ColumnStretchMode="All"
+                                            ColumnStretchMinWidth="100"/>
+                        </xcdg:DataGridControl.View>
+                    </xcdg:DataGridControl>
 
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
+                </Grid>
+            </TabItem>
 
-                <!--Icon buttons-->
-                <!--<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> 
-                     from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> 
-                     is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" 
-                     title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>-->
-                <StackPanel Orientation="Horizontal"
-                            HorizontalAlignment="Right">
-                    <Button Style="{StaticResource IconButton}"
-                            Command="{Binding OpenAddWindowCommand}"
-                            Content="M26,0C11.664,0,0,11.663,0,26s11.664,26,26,26s26-11.663,26-26S40.336,0,26,0z M38.5,28H28v11c0,1.104-0.896,2-2,2
-                            s-2-0.896-2-2V28H13.5c-1.104,0-2-0.896-2-2s0.896-2,2-2H24V14c0-1.104,0.896-2,2-2s2,0.896,2,2v10h10.5c1.104,0,2,0.896,2,2
-                            S39.604,28,38.5,28z"
-                            Width="{StaticResource GridIconsSize}"
-                            Height="{StaticResource GridIconsSize}"
-                            Margin="2"/>
-                    <Button Style="{StaticResource IconButton}"
-                            Command="{Binding DeletePersonCommand}"
-                            CommandParameter="{Binding ElementName=MainDataGrid, Path=SelectedItems}"
-                            Content="M26,0C11.664,0,0,11.663,0,26s11.664,26,26,26s26-11.663,26-26S40.336,0,26,0z M38.5,28h-25c-1.104,0-2-0.896-2-2
-                            s0.896-2,2-2h25c1.104,0,2,0.896,2,2S39.604,28,38.5,28z"
-                            Width="{StaticResource GridIconsSize}"
-                            Height="{StaticResource GridIconsSize}"
-                            Margin="2"/>
-                    <Button Style="{StaticResource IconButton}"
-                            Command="{Binding SaveDataCommand}"
-                            Content="M39.914,0H0.5v49h48V8.586L39.914,0z M10.5,2h26v16h-26V2z M39.5,47h-31V26h31V47z
-                            M13.5,32h7c0.553,0,1-0.447,1-1s-0.447-1-1-1h-7c-0.553,0-1,0.447-1,1S12.947,32,13.5,32z
-                            M13.5,36h10c0.553,0,1-0.447,1-1s-0.447-1-1-1h-10c-0.553,0-1,0.447-1,1S12.947,36,13.5,36z
-                            M26.5,36c0.27,0,0.52-0.11,0.71-0.29c0.18-0.19,0.29-0.45,0.29-0.71s-0.11-0.521-0.29-0.71c-0.37-0.37-1.04-0.37-1.41,0
-                            c-0.19,0.189-0.3,0.439-0.3,0.71c0,0.27,0.109,0.52,0.29,0.71C25.979,35.89,26.229,36,26.5,36z"
-                            Width="{StaticResource GridIconsSize}"
-                            Height="{StaticResource GridIconsSize}"
-                            Margin="2"/>
-                </StackPanel>
-
-                <!--Main datagrid-->
-                <xcdg:DataGridControl ItemsSource="{Binding Source={StaticResource MainDataGridSource}}"
-                                      Grid.Row="1"                  
-                                      HorizontalAlignment="Stretch"
-                                      HorizontalContentAlignment="Stretch"
-                                      Margin="2"
-                                      SelectionMode="Multiple"
-                                      x:Name="MainDataGrid">
-                    <xcdg:DataGridControl.View>
-                        <xcdg:TableView ColumnStretchMode="All"
-                                        ColumnStretchMinWidth="100"/>
-                    </xcdg:DataGridControl.View>
-                </xcdg:DataGridControl>
-
-            </Grid>
-        </Grid>
+            <!--Statistics view-->
+            <TabItem Header="{x:Static properties:Resources.Statistics}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <view:CommonNamesView Grid.Column="0"/>
+                    <view:CommonSurenamesView Grid.Column="1"/>
+                    <view:BirthdayTodayView Grid.Column="2"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
 
 
         <!--Window container-->
