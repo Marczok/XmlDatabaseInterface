@@ -201,7 +201,7 @@
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
                     <view:CommonNamesView Grid.Column="0"/>
-                    <view:CommonSurenamesView Grid.Column="1"/>
+                    <view:CommonSurnamesView Grid.Column="1"/>
                     <view:BirthdayTodayView Grid.Column="2"/>
                 </Grid>
             </TabItem>
@@ -275,7 +275,7 @@
                                Margin="2"/>
                     <TextBlock Grid.Column="0"
                                Grid.Row="1"
-                               Text="{x:Static properties:Resources.Surename}"
+                               Text="{x:Static properties:Resources.Surname}"
                                Margin="2"/>
                     <TextBlock Grid.Column="0"
                                Grid.Row="2"
@@ -291,7 +291,7 @@
                              Margin="2"/>
                     <TextBox Grid.Column="1"
                              Grid.Row="1"
-                             Text="{Binding AddSurename, Mode=TwoWay}"
+                             Text="{Binding AddSurname, Mode=TwoWay}"
                              Margin="2"/>
                     <TextBox Grid.Column="1"
                              Grid.Row="2"
