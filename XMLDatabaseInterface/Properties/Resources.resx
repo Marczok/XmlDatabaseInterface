@@ -135,8 +135,8 @@
   <data name="MostCommonNames" xml:space="preserve">
     <value>10 Most Common Names</value>
   </data>
-  <data name="MostCommonSurename" xml:space="preserve">
-    <value>10 Most Common Surenames</value>
+  <data name="MostCommonSurname" xml:space="preserve">
+    <value>10 Most Common Surnames</value>
   </data>
   <data name="TodaysBirthdays" xml:space="preserve">
     <value>Today's Birthdays</value>
@@ -147,8 +147,8 @@
   <data name="Count" xml:space="preserve">
     <value>Count</value>
   </data>
-  <data name="Surename" xml:space="preserve">
-    <value>Surename</value>
+  <data name="Surname" xml:space="preserve">
+    <value>Surname</value>
   </data>
   <data name="AddPerson" xml:space="preserve">
     <value>Add Person</value>

@@ -67,16 +67,16 @@ namespace XMLDatabaseInterface.Core
                 var dateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
                 dateTime = dateTime.AddSeconds(rnd.Next(1532031622)).ToLocalTime();
 
-                string name = string.Empty, surename = string.Empty;
-                while (name == string.Empty || surename == string.Empty)
+                string name = string.Empty, surname = string.Empty;
+                while (name == string.Empty || surname == string.Empty)
                 {
                     name = firstNames[rnd.Next(firstNames.Length - 1)];
-                    surename = lastNames[rnd.Next(lastNames.Length - 1)];
+                    surname = lastNames[rnd.Next(lastNames.Length - 1)];
                 }
 
                 var address = _adresses[rnd.Next(_adresses.Length - 1)] + " " + rnd.Next(128);
 
-                persons.Add(new Person(name, surename, address, dateTime.Date));
+                persons.Add(new Person(name, surname, address, dateTime.Date));
                 progress?.Report((double)i / size);
             }
 

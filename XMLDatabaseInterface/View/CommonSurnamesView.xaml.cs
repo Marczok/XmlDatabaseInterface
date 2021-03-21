@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace XMLDatabaseInterface.View
 {
     /// <summary>
-    /// Interaction logic for CommonSurenamesView.xaml
+    /// Interaction logic for CommonSurnamesView.xaml
     /// </summary>
-    public partial class CommonSurenamesView : UserControl
+    public partial class CommonSurnamesView : UserControl
     {
-        public CommonSurenamesView()
+        public CommonSurnamesView()
         {
             InitializeComponent();
         }

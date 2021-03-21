@@ -205,11 +205,11 @@ namespace XMLDatabaseInterface.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 10 Most Common Surenames.
+        ///   Looks up a localized string similar to 10 Most Common Surnames.
         /// </summary>
-        public static string MostCommonSurename {
+        public static string MostCommonSurname {
             get {
-                return ResourceManager.GetString("MostCommonSurename", resourceCulture);
+                return ResourceManager.GetString("MostCommonSurname", resourceCulture);
             }
         }
         
@@ -286,11 +286,11 @@ namespace XMLDatabaseInterface.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Surename.
+        ///   Looks up a localized string similar to Surname.
         /// </summary>
-        public static string Surename {
+        public static string Surname {
             get {
-                return ResourceManager.GetString("Surename", resourceCulture);
+                return ResourceManager.GetString("Surname", resourceCulture);
             }
         }
         

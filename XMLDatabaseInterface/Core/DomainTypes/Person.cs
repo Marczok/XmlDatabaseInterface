@@ -7,17 +7,17 @@ namespace XMLDatabaseInterface.Core.DomainTypes
     {
         public Person(){}
 
-        public Person(string name, string surename, string address, DateTime birthdate)
+        public Person(string name, string surname, string address, DateTime birthdate)
         {
             Name = name;
-            Surename = surename;
+            Surname = surname;
             Address = address;
             Birthdate = birthdate;
         }
 
         [XmlAttribute] public string Name { get; set; }
 
-        [XmlAttribute] public string Surename { get; set; }
+        [XmlAttribute] public string Surname { get; set; }
 
         [XmlAttribute] public string Address { get; set; }
 
@@ -26,7 +26,7 @@ namespace XMLDatabaseInterface.Core.DomainTypes
         protected bool Equals(Person other)
         {
             return string.Equals(Name, other.Name) && 
-                   string.Equals(Surename, other.Surename) &&
+                   string.Equals(Surname, other.Surname) &&
                    string.Equals(Address, other.Address) && 
                    string.Equals(Birthdate, other.Birthdate);
         }
@@ -43,7 +43,7 @@ namespace XMLDatabaseInterface.Core.DomainTypes
             unchecked
             {
                 var hashCode = Name != null ? Name.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (Surename != null ? Surename.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Surname != null ? Surname.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (Address != null ? Address.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (Birthdate != null ? Birthdate.GetHashCode() : 0);
                 return hashCode;
