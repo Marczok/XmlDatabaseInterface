@@ -10,7 +10,7 @@ namespace XMLDatabaseInterface.Core.DomainTypes
         public Person(string name, string surname, string address, DateTime birthdate)
         {
             Name = name;
-            Surename = surname;
+            Surname = surname;
             Address = address;
             Birthdate = birthdate;
         }
@@ -43,7 +43,7 @@ namespace XMLDatabaseInterface.Core.DomainTypes
             unchecked
             {
                 var hashCode = Name != null ? Name.GetHashCode() : 0;
-                hashCode = (hashCode * 397) ^ (Surename != null ? Surname.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (Surname != null ? Surname.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (Address != null ? Address.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (Birthdate != null ? Birthdate.GetHashCode() : 0);
                 return hashCode;
