@@ -26,7 +26,7 @@
                                TextAlignment="Center"
                                TextWrapping="Wrap"
                                FontWeight="Bold"/>
-                    <TextBlock Text="{x:Static properties:Resources.Surename}"
+                    <TextBlock Text="{x:Static properties:Resources.Surname}"
                                TextAlignment="Center"
                                TextWrapping="Wrap"
                                Grid.Row="0"
@@ -47,7 +47,7 @@
                                     <TextBlock Text="{Binding Name}"
                                                TextAlignment="Center"
                                                TextWrapping="Wrap"/>
-                                    <TextBlock Text="{Binding Surename}"
+                                    <TextBlock Text="{Binding Surname}"
                                                TextAlignment="Center"
                                                TextWrapping="Wrap"
                                                Grid.Column="1"/>
