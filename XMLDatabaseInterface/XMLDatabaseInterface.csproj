@@ -164,7 +164,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\CommonSurenamesView.xaml">
+    <Page Include="View\CommonSurnamesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -178,11 +178,11 @@
     </Compile>
     <Compile Include="Core\DomainTypes\NameStatistic.cs" />
     <Compile Include="Core\DomainTypes\Person.cs" />
-    <Compile Include="Core\DomainTypes\SurenameStatistics.cs" />
+    <Compile Include="Core\DomainTypes\SurnameStatistics.cs" />
     <Compile Include="Core\XmlDataProvider.cs" />
     <Compile Include="ViewModel\BirthdayTodayViewModel.cs" />
     <Compile Include="ViewModel\CommonNamesViewModel.cs" />
-    <Compile Include="ViewModel\CommonSurenamesViewModel.cs" />
+    <Compile Include="ViewModel\CommonSurnamesViewModel.cs" />
     <Compile Include="ViewModel\IDataProvider.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
@@ -192,8 +192,8 @@
     <Compile Include="View\CommonNamesView.xaml.cs">
       <DependentUpon>CommonNamesView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CommonSurenamesView.xaml.cs">
-      <DependentUpon>CommonSurenamesView.xaml</DependentUpon>
+    <Compile Include="View\CommonSurnamesView.xaml.cs">
+      <DependentUpon>CommonSurnamesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
