@@ -8,13 +8,13 @@ namespace XMLDatabaseInterface.Core.DomainTypes
 {
     public class SurenameStatistics
     {
-        public SurenameStatistics(string surename, int count)
+        public SurenameStatistics(string surname, int count)
         {
-            Surename = surename;
+            Surname = surname;
             Count = count;
         }
 
-        public string Surename { get; }
+        public string Surname { get; }
         public int Count { get; }
     }
 }
